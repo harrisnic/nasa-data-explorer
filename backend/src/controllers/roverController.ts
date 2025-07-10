@@ -6,7 +6,7 @@ export class RoverController {
 
     static async getAllRovers(req: Request, res: Response): Promise<void> {
         try {
-            const rovers: Rover[] = RoverModel.findAll();
+            const rovers: Rover[] = await RoverModel.findAll();
 
             const response: ApiResponse<Rover[]> = {
                 success: true,
@@ -37,7 +37,7 @@ export class RoverController {
                 return;
             }
 
-            const rover = RoverModel.findById(id);
+            const rover = await RoverModel.findById(id);
 
             if (!rover) {
                 const response: ApiResponse<never> = {
