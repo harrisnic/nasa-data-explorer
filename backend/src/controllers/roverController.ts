@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { RoverModel } from '../models/Rover.js';
 import { ApiResponse, Rover } from '../types';
+import {RoverModel} from "../models/Rover";
 
 export class RoverController {
 

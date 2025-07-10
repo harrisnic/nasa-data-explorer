@@ -1,11 +1,9 @@
-import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import axios, {InternalAxiosRequestConfig} from 'axios';
+import {config as configVar} from "../config";
 
 // Create axios instance
 const api = axios.create({
-    baseURL: 'https://api.nasa.gov/mars-photos/api/v1',
+    baseURL: configVar.nasa.apiUrl,
     timeout: 10000, // 10 secs
     headers: {
         'Content-Type': 'application/json',
@@ -13,10 +11,10 @@ const api = axios.create({
 });
 
 // Request interceptor to handle configurations
-api.interceptors.request.use((config) => {
+api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     config.params = {
         ...config.params,
-        api_key: process.env.NASA_API_KEY || 'DEMO_KEY'
+        api_key: configVar.nasa.apiKey
     };
     return config;
 });
