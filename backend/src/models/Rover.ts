@@ -8,11 +8,15 @@ export class RoverModel {
         { id: 3, name: 'Spirit' }
     ];
 
-    static  findAll(): Rover[] {
+    static async findAll(): Promise<Rover[]> {
+        // Simulate API delay of 1 second
+        await new Promise(resolve => setTimeout(resolve, 1000));
         return [...this.rovers];
     }
 
-    static  findById(id: number): Rover | undefined {
+    static async findById(id: number): Promise<Rover | undefined> {
+        // Simulate API delay of 1 second
+        await new Promise(resolve => setTimeout(resolve, 1000));
         return this.rovers.find(rover => rover.id === id);
     }
 
