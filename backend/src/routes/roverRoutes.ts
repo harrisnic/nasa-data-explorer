@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { RoverController } from '../controllers/roverController.js';
+import { RoverController } from '../controllers/roverController';
 
 const router = Router();
 

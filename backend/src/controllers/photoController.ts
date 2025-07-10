@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { PhotoModel } from '../models/Photo';
 import { validationResult } from 'express-validator';
 import {photoValidationRules} from "../validation";
+import {NotFoundError} from "../errors";
 
 export class PhotoController {
 
@@ -27,12 +28,24 @@ export class PhotoController {
                 message: 'Rover photos retrieved successfully'
             });
 
-        } catch (error) {
-            const status = error.message.includes('not found') ? 404 : 500;
-            res.status(status).json({
-                success: false,
-                error: error.message
-            });
+        } catch (error: unknown) {
+            if (error instanceof NotFoundError) {
+                res.status(error.statusCode).json({
+                    success: false,
+                    error: error.message
+                });
+            } else if (error instanceof Error) {
+                res.status(500).json({
+                    success: false,
+                    error: error.message
+                });
+            } else {
+                res.status(500).json({
+                    success: false,
+                    error: 'An unknown error occurred'
+                });
+            }
+
         }
     }
 

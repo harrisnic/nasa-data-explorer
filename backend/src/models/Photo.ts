@@ -3,6 +3,10 @@ import api from "../config/api";
 import {RoverModel} from "./Rover";
 import {NotFoundError} from "../errors";
 
+interface NasaApiResponse {
+    photos: Photo[];
+}
+
 export class PhotoModel {
 
     static async findByRoverIdAndDate(id: number, date: string): Promise<Photo[]> {
@@ -13,7 +17,7 @@ export class PhotoModel {
             throw new NotFoundError(`Rover with id ${id} not found`);
         }
 
-        const response = await api.get(`/rovers/${rover.name.toLowerCase()}/photos`, {
+        const response = await api.get<NasaApiResponse>(`/rovers/${rover.name.toLowerCase()}/photos`, {
             params: {
                 earth_date: date
             }
