@@ -5,7 +5,7 @@ export interface Rover {
 
 export interface ApiResponse<T> {
     success: boolean;
-    data?: T;
+    results?: T;
     message: string;
     error?: string;
 }

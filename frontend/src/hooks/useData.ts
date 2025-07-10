@@ -3,7 +3,9 @@ import apiClient from "@/services/api-client.ts";
 import {CanceledError} from "axios";
 
 interface FetchResponse<T> {
-    photos: T[];
+    success: boolean;
+    message: string;
+    results: T[];
 }
 
 const useData = <T>(endpoint: string) => {
@@ -19,7 +21,7 @@ const useData = <T>(endpoint: string) => {
         apiClient
             .get<FetchResponse<T>>(endpoint, { signal: controller.signal })
             .then(res => {
-                setData(res.data.photos)
+                setData(res.data.results)
                 setLoading(false)
             })
             .catch(err => {
@@ -32,6 +34,7 @@ const useData = <T>(endpoint: string) => {
         return () => controller.abort()
     }, [])
 
+    console.log(data)
     return {data, error, loading}
 }
 

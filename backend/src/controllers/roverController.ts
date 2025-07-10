@@ -10,7 +10,7 @@ export class RoverController {
 
             const response: ApiResponse<Rover[]> = {
                 success: true,
-                data: rovers,
+                results: rovers,
                 message: 'Rovers retrieved successfully'
             };
             res.json(response);
@@ -50,7 +50,7 @@ export class RoverController {
 
             const response: ApiResponse<Rover> = {
                 success: true,
-                data: rover,
+                results: rover,
                 message: 'Rover retrieved successfully'
             };
             res.json(response);
