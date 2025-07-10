@@ -1,6 +1,7 @@
 import {Grid, GridItem} from "@chakra-ui/react";
 import NavBar from "@/components/NavBar.tsx";
 import PhotoGrid from "@/components/PhotoGrid.tsx";
+import RoverList from "@/components/RoverList.tsx";
 
 function App() {
 
@@ -20,10 +21,12 @@ function App() {
             <NavBar/>
         </GridItem>
 
-        <GridItem hideBelow="lg" area="aside">Aside</GridItem>
+        <GridItem hideBelow="lg" area="aside">
+            <RoverList/>
+        </GridItem>
 
         <GridItem area="main">
-            <PhotoGrid/>
+            {/*<PhotoGrid/>*/}
         </GridItem>
 
     </Grid>)

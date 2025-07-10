@@ -3,8 +3,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import roverRoutes from './routes/roverRoutes.js';
-import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
+import { errorHandler } from './middleware/errorHandler.js';
 import { ApiResponse } from './types';
+import photoRoutes from "./routes/photoRoutes";
 
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
@@ -18,12 +19,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/rovers', roverRoutes);
+app.use('/api/photos', photoRoutes);
 
 // Health check endpoint
 app.get('/', (req: Request, res: Response) => {
     const response: ApiResponse<{ version: string; timestamp: string; description: string }> = {
         success: true,
-        data: {
+        results: {
             version: '1.0.0',
             timestamp: new Date().toISOString(),
             description: 'Mars Rover Photo API - Explore the Red Planet through rover images'
@@ -34,7 +36,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // Error handling middleware
-app.use(notFoundHandler);
 app.use(errorHandler);
 
 // Start server

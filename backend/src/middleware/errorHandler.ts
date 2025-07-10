@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { BaseError } from '../errors';
 import { ApiResponse } from '../types';
 
 export const errorHandler = (
@@ -9,19 +10,12 @@ export const errorHandler = (
 ): void => {
     console.error('Error:', err);
 
+    const statusCode = err instanceof BaseError ? err.statusCode : 500;
     const response: ApiResponse<never> = {
         success: false,
-        message: 'Internal server error',
+        message: err instanceof BaseError ? err.message : 'Internal server error',
         error: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
     };
 
-    res.status(500).json(response);
-};
-
-export const notFoundHandler = (req: Request, res: Response): void => {
-    const response: ApiResponse<never> = {
-        success: false,
-        message: `Route ${req.originalUrl} not found`
-    };
-    res.status(404).json(response);
+    res.status(statusCode).json(response);
 };

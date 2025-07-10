@@ -30,3 +30,12 @@ backend/.idea
 frontend/.vscode/*
 frontend/!.vscode/extensions.json
 frontend/.idea
+
+# Environment variables
+backend/.env
+backend/.env.local
+backend/.env.*.local
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+

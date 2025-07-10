@@ -3,8 +3,8 @@ import {Rover} from "../types";
 export class RoverModel {
 
     private static rovers: Rover[] = [
-        { id: 1, name: 'Curiosity' },
-        { id: 2, name: 'Opportunity' },
+        { id: 1, name: 'Curiosity'},
+        { id: 2, name: 'Opportunity'},
         { id: 3, name: 'Spirit' }
     ];
 
