@@ -1,21 +1,21 @@
-import {SimpleGrid, Text} from "@chakra-ui/react";
+import {SimpleGrid} from "@chakra-ui/react";
 import usePhotos from "@/hooks/usePhotos.ts";
 import PhotoCard from "./PhotoCard.tsx";
 import PhotoCardSkeleton from "@/components/PhotoCardSkeleton.tsx";
 import PhotoCardContainer from "@/components/PhotoCardContainer.tsx";
+import AlertBox from "@/components/AlertBox.tsx";
 
 const PhotoGrid = () => {
 
     const {data, error, loading} = usePhotos()
-    const skeletons = [1, 2, 3, 4, 5]
+    const skeletons = [1, 2, 3, 4, 5, 6]
 
-    if (error) return <Text>{error}</Text>;
+    if (error) return <AlertBox status="error" description={error} />
 
     return (
         <SimpleGrid
             columns={{sm: 1, md: 2, lg: 3, xl: 5}}
-            spacing={3}
-            padding="10px"
+            padding={4}
         >
             {loading &&
                 skeletons.map((skeleton) => (
@@ -24,8 +24,7 @@ const PhotoGrid = () => {
                     </PhotoCardContainer>
                 ))
             }
-            {!loading &&
-                data.map((photo) => (
+            {data.map((photo) => (
                     <PhotoCardContainer key={photo.id}>
                         <PhotoCard photo={photo} />
                     </PhotoCardContainer>
