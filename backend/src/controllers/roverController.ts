@@ -24,20 +24,10 @@ export class RoverController {
         }
     }
 
-    static async getRoverById(req: Request, res: Response): Promise<void> {
+    static async getRoverByName(req: Request, res: Response): Promise<void> {
         try {
-            const id = Number(req.params.id);
-
-            if (isNaN(id)) {
-                const response: ApiResponse<never> = {
-                    success: false,
-                    message: 'Invalid rover ID'
-                };
-                res.status(400).json(response);
-                return;
-            }
-
-            const rover = await RoverModel.findById(id);
+            const name = req.params.name;
+            const rover = await RoverModel.findByName(name);
 
             if (!rover) {
                 const response: ApiResponse<never> = {
