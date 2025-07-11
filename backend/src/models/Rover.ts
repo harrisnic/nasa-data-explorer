@@ -1,23 +1,24 @@
 import {Rover} from "../types";
+import api from "../config/api";
+
+interface NasaRoversApiResponse {
+    rovers: Rover[];
+}
+
+interface NasaRoverApiResponse {
+    rover: Rover;
+}
 
 export class RoverModel {
 
-    private static rovers: Rover[] = [
-        { id: 1, name: 'Curiosity'},
-        { id: 2, name: 'Opportunity'},
-        { id: 3, name: 'Spirit' }
-    ];
-
     static async findAll(): Promise<Rover[]> {
-        // Simulate API delay of 1 second
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        return [...this.rovers];
+        const response = await api.get<NasaRoversApiResponse>('/rovers');
+        return response.data.rovers;
     }
 
-    static async findById(id: number): Promise<Rover | undefined> {
-        // Simulate API delay of 1 second
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        return this.rovers.find(rover => rover.id === id);
+    static async findByName(name: string): Promise<Rover | undefined> {
+        const response = await api.get<NasaRoverApiResponse>(`/rovers/${name.toLowerCase()}`);
+        return response.data.rover;
     }
 
 }
