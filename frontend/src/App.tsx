@@ -26,7 +26,7 @@ function App() {
         </GridItem>
 
         <GridItem area="main">
-            {/*<PhotoGrid/>*/}
+            <PhotoGrid/>
         </GridItem>
 
     </Grid>)

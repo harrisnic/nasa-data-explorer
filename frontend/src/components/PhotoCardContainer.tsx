@@ -8,11 +8,12 @@ interface Props {
 const PhotoCardContainer = ({children}: Props) => {
     return (
         <Box
+            margin={2}
             overflow="hidden"
             borderWidth="1px"
             borderRadius="md"
-            shadow="md"
-            _hover={{shadow: "lg"}}
+            shadow="sm"
+            _hover={{shadow: "md"}}
         >
             {children}
         </Box>
