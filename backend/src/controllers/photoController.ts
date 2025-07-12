@@ -6,9 +6,9 @@ import {NotFoundError} from "../errors";
 
 export class PhotoController {
 
-    static validate = photoValidationRules.getByRoverIdAndDate
+    static validateRoverAndDate = photoValidationRules.getByRoverAndDate
 
-    static async getPhotosByRoverIdAndDate(req: Request, res: Response): Promise<void> {
+    static async getPhotosByRoverAndDate(req: Request, res: Response): Promise<void> {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             res.status(400).json({
@@ -19,8 +19,14 @@ export class PhotoController {
         }
 
         try {
-            const { id, date } = req.params;
-            const photos = await PhotoModel.findByRoverIdAndDate(Number(id), date);
+            const { rover, date }: {rover: string, date: string} = req.query;
+            let photos;
+
+            if (date) {
+                photos = await PhotoModel.findByRoverAndDate(rover, date);
+            } else {
+                photos = await PhotoModel.findLatestByRoverName(rover)
+            }
 
             res.status(200).json({
                 success: true,
@@ -45,7 +51,6 @@ export class PhotoController {
                     error: 'An unknown error occurred'
                 });
             }
-
         }
     }
 
