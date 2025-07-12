@@ -1,9 +1,5 @@
 import useData from "@/hooks/useData.ts";
-
-export interface Rover {
-    id: number;
-    name: string;
-}
+import type {Rover} from "@/types";
 
 const useRovers = () => useData<Rover>('/rovers')
 

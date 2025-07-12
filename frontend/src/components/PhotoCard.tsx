@@ -1,6 +1,6 @@
-import type {Photo} from "@/hooks/usePhotos.ts";
-import {Box, List, Flex, HStack, Stack, Text, Image, Icon, Badge} from "@chakra-ui/react";
+import {Box, Flex, HStack, Stack, Text, Image, Icon, Badge} from "@chakra-ui/react";
 import {LuCalendarDays, LuOrbit, LuFocus, LuBot, LuBattery, LuBatteryFull} from "react-icons/lu";
+import type {Photo} from "@/types";
 
 interface Props {
     photo: Photo;
