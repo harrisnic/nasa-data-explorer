@@ -1,29 +1,11 @@
 import useData from "@/hooks/useData.ts";
+import type {Photo, Rover} from "@/types";
 
-export interface Rover {
-    id: number;
-    name: string;
-    landing_date: string;
-    launch_date: string;
-    status: string;
-}
+const usePhotos = (selectedRover: Rover) =>
 
-interface Camera {
-    id: number;
-    name: string;
-    rover_id: number;
-    full_name: string;
-}
+    useData<Photo>('/photos',
+        {params: {rover: selectedRover?.name}},
+        [selectedRover?.name])
 
-export interface Photo {
-    id: number;
-    sol: number;
-    camera: Camera
-    img_src: string;
-    earth_date: string;
-    rover: Rover;
-}
-
-const usePhotos = () => useData<Photo>('/photos/rover/1/date/2025-2-2')
 
 export default usePhotos
