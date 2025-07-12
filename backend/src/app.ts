@@ -9,6 +9,7 @@ import { ApiResponse } from './types';
 import photoRoutes from "./routes/photoRoutes";
 import rateLimit from "express-rate-limit";
 import { cacheMiddleware } from './middleware/cacheMiddleware';
+import {cacheService} from "./services/cacheService";
 
 const app: Application = express();
 
@@ -51,6 +52,17 @@ app.get('/', cacheMiddleware(300), (req: Request, res: Response) => {
             description: 'Mars Rover Photo API - Explore the Red Planet through rover images'
         },
         message: 'Mars Rover API is running successfully'
+    };
+    res.json(response);
+});
+
+// Utility endpoint to flush cache
+app.post('/api/utils/flush-cache', (req: Request, res: Response) => {
+    cacheService.flush();
+    const response: ApiResponse<null> = {
+        success: true,
+        results: null,
+        message: 'Cache flushed successfully.'
     };
     res.json(response);
 });
