@@ -3,7 +3,7 @@ import {PhotoController} from "../controllers/photoController";
 
 const router = Router();
 
-// GET /api/photos/rover/:id/date/:date
-router.get('/rover/:id/date/:date', PhotoController.validate, PhotoController.getPhotosByRoverIdAndDate);
+// GET /api/photos?rover=spirit&date=2025-1-1
+router.get('/', PhotoController.validateRoverAndDate, PhotoController.getPhotosByRoverAndDate);
 
 export default router;
