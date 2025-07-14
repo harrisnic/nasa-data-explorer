@@ -28,10 +28,10 @@ const RoverList = ({rovers, selectedRover, onSelectRover}: Props) => {
                     const isSelected = selectedRover?.id === rover.id;
                     return (
                         <List.Item key={rover.id}>
-                            <List.Indicator asChild color={isSelected ? "pink.600" : "gray.400"}>
+                            <List.Indicator asChild color={isSelected ? "pink.600" : "gray.500"}>
                                 <RoverIcon/>
                             </List.Indicator>
-                            <Link onClick={() => {onSelectRover(rover)}} variant="plain">
+                            <Link onClick={() => {onSelectRover(rover)}} variant="plain" color={isSelected ? "pink.600" : "gray.500"}>
                                 {rover.name}
                             </Link>
                         </List.Item>

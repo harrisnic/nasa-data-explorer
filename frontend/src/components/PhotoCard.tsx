@@ -1,6 +1,7 @@
 import {Box, Flex, HStack, Stack, Text, Image, Icon, Badge} from "@chakra-ui/react";
 import {LuCalendarDays, LuOrbit, LuFocus, LuBot, LuBattery, LuBatteryFull} from "react-icons/lu";
 import type {Photo} from "@/types";
+import PhotoImage from "@/components/PhotoImage.tsx";
 
 interface Props {
     photo: Photo;
@@ -9,7 +10,7 @@ interface Props {
 const PhotoCard = ({photo}: Props) => {
     return (
         <Box>
-            <Image src={photo.img_src} alt={photo.id} />
+            <PhotoImage src={photo.img_src} alt={photo.camera.full_name} />
 
             <Box p="2" spaceY="2">
                 <Flex gap="4" justify="space-between">
@@ -67,7 +68,6 @@ const PhotoCard = ({photo}: Props) => {
                     </Stack>
                 </Flex>
             </Box>
-
 
         </Box>
     )
