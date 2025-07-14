@@ -14,13 +14,10 @@ const PhotoGrid = ({selectedRover}: Props) => {
 
     if (!selectedRover) return null; // Guard clause
 
-    console.log(selectedRover)
-
     const {data, error, loading} = usePhotos(selectedRover)
     const skeletons = [1, 2, 3, 4, 5, 6]
 
     if (error) return <AlertBox status="error" description={error} />
-
 
     return (
         <SimpleGrid

@@ -6,14 +6,14 @@ interface PhotoImageProps {
     alt: string;
 }
 
-const FALLBACK_IMAGE = "/fallback-image.png";
+const fallbackImage: string = "/fallback-image.png";
 
 const PhotoImage = ({ src, alt }: PhotoImageProps) => {
 
     const [imgSrc, setImgSrc] = useState(src);
 
     const handleError = () => {
-        setImgSrc(FALLBACK_IMAGE);
+        setImgSrc(fallbackImage);
     };
 
     return (
