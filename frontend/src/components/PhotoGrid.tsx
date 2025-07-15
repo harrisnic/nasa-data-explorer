@@ -13,20 +13,10 @@ interface Props {
 
 const PhotoGrid = ({selectedRover, selectedDate}: Props) => {
 
-    console.log('****************************************************')
-    console.log(typeof selectedRover)
-    console.log(selectedRover?.name)
-    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++')
-
     if (!selectedRover) return;
 
     const {data, error, loading} = usePhotos(selectedRover, selectedDate)
     const skeletons = [1, 2, 3, 4, 5, 6]
-
-    // console.log('****************************************************')
-    // console.log('Selected rover:', selectedRover)
-    // console.log('Selected date:', selectedDate)
-    // console.log('****************************************************')
 
     if (error) return <AlertBox status="error" description={error} />
 
