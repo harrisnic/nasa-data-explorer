@@ -5,7 +5,7 @@ import {useQuery} from "@tanstack/react-query";
 
 const apiClient = new APIClient<Photo>('/photos');
 
-const usePhotos = (selectedRover: Rover | null, selectedDate: Date | null) => {
+const usePhotos = (selectedRover: Rover, selectedDate: Date | null) => {
     const formattedDate = selectedDate ? selectedDate.toLocaleDateString('en-CA') : ''; // YYYY-MM-DD
 
     const { data, error, isLoading } = useQuery<FetchResponse<Photo>>({

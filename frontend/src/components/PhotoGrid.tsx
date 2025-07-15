@@ -5,17 +5,26 @@ import PhotoCardSkeleton from "@/components/PhotoCardSkeleton.tsx";
 import PhotoCardContainer from "@/components/PhotoCardContainer.tsx";
 import AlertBox from "@/components/AlertBox.tsx";
 import type {Rover} from "@/types";
+import {useContext} from "react";
+import {NasaCtx} from "@/contexts/nasaCtx.ts";
 
 interface Props {
     selectedRover: Rover | null;
     selectedDate: Date | null;
 }
 
-const PhotoGrid = ({selectedRover, selectedDate}: Props) => {
+const PhotoGrid = () => {
 
-    if (!selectedRover) return;
+    const { nasaCtxData: {selectedRover, selectedDate}} = useContext(NasaCtx)
 
-    const {data, error, loading} = usePhotos(selectedRover, selectedDate)
+    // if (!selectedRover) return;
+
+    console.log('*********************')
+    console.log(selectedRover)
+    console.log(selectedDate)
+    console.log('*********************')
+
+    const {data, error, loading} = usePhotos(selectedRover!, selectedDate!)
     const skeletons = [1, 2, 3, 4, 5, 6]
 
     if (error) return <AlertBox status="error" description={error} />
@@ -45,3 +54,4 @@ const PhotoGrid = ({selectedRover, selectedDate}: Props) => {
 }
 
 export default PhotoGrid
+1

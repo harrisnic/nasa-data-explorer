@@ -1,13 +1,10 @@
-import "flatpickr/dist/themes/material_green.css";
-
+import "flatpickr/dist/themes/dark.css";
 import Flatpickr from "react-flatpickr";
 import { Box } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-
-type Props = {
-  selectedDate: Date | null;
-  onDateChange: (date: Date | null) => void;
-};
+import {useContext} from "react";
+import {NasaCtx} from "@/contexts/nasaCtx.ts";
+import {NasaActionTypes} from "@/reducers/nasaReducer.ts";
 
 const StyledDatePickerWrapper = styled(Box)`
     .flatpickr-input {
@@ -35,15 +32,17 @@ const StyledDatePickerWrapper = styled(Box)`
     }
 `;
 
-const DateSelector = ({ selectedDate, onDateChange }: Props) => {
+const DateSelector = () => {
+    const { nasaCtxData: {selectedDate}, nasaCtxDispatcher } = useContext(NasaCtx)
+
     return (
         <StyledDatePickerWrapper>
             <Flatpickr
                 placeholder="Select a date"
-                value={selectedDate || undefined}
+                value={selectedDate ?? ""}
                 onChange={(selectedDates) => {
                     const date = selectedDates[0] || null;
-                    onDateChange(date);
+                    nasaCtxDispatcher({ type: NasaActionTypes.SIMPLE_APPEND, payload: { selectedDate: date}});
                 }}
                 options={{
                     dateFormat: "Y-m-d",
