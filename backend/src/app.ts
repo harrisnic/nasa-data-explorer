@@ -56,7 +56,7 @@ app.get('/', cacheMiddleware(300), (req: Request, res: Response) => {
     res.json(response);
 });
 
-// Utility endpoint to flush cache
+// // Utility endpoint to flush cache
 app.post('/api/utils/flush-cache', (req: Request, res: Response) => {
     cacheService.flush();
     const response: ApiResponse<null> = {

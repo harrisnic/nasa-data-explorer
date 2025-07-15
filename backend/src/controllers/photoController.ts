@@ -3,6 +3,7 @@ import { PhotoModel } from '../models/Photo';
 import { validationResult } from 'express-validator';
 import {photoValidationRules} from "../validation";
 import {NotFoundError} from "../errors";
+import {Photo} from "../types";
 
 export class PhotoController {
 
@@ -19,8 +20,8 @@ export class PhotoController {
         }
 
         try {
-            const { rover, date }: {rover: string, date: string} = req.query;
-            let photos;
+            const { rover, date }: {rover: string, date: string | null} = req.query;
+            let photos: Photo[] | [];
 
             if (date) {
                 photos = await PhotoModel.findByRoverAndDate(rover, date);
