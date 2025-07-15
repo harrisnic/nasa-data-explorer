@@ -4,9 +4,9 @@ import PhotoGrid from "@/components/PhotoGrid.tsx";
 import RoverList from "@/components/RoverList.tsx";
 import {useEffect, useState} from "react";
 import type {Rover} from "@/types";
-import useRovers from "@/hooks/useRovers.ts";
 import AlertBox from "@/components/AlertBox.tsx";
 import DateSelector from "@/components/DateSelector.tsx";
+import useRovers from "@/hooks/useRovers.ts";
 
 function App() {
     const { data: rovers, error, loading } = useRovers();
@@ -19,7 +19,7 @@ function App() {
         if (rovers?.length > 0 && !selectedRover) {
             setSelectedRover(rovers[0]);
         }
-    }, [rovers]);
+    }, [rovers, selectedRover]);
 
     if (loading) return <Spinner m="6"/>;
     if (error) {
@@ -47,7 +47,7 @@ function App() {
         </GridItem>
 
         <GridItem area="aside" p="3">
-            <RoverList rovers={rovers} selectedRover={selectedRover} onSelectRover={setSelectedRover}/>
+            <RoverList rovers={rovers || []} selectedRover={selectedRover} onSelectRover={setSelectedRover}/>
         </GridItem>
 
         <GridItem area="main">

@@ -1,9 +1,28 @@
-import axios from 'axios';
+import axios from "axios";
+import type { AxiosRequestConfig } from "axios";
 
-export default axios.create({
-    baseURL: 'http://localhost:3000/api',
-    // baseURL: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3',
-    // params: {
-    //     api_key: 'vteTG09tge5SF58uMlDNDrj4PrjhQZQOdYdxitJv'
-    // }
-})
+export interface FetchResponse<T> {
+    success: boolean;
+    message: string;
+    results: T[];
+}
+
+const axiosInstance = axios.create({
+    baseURL: "http://localhost:3000/api",
+});
+
+class APIClient<T> {
+    endpoint: string;
+
+    constructor(endpoint: string) {
+        this.endpoint = endpoint;
+    }
+
+    getAll = (config: AxiosRequestConfig) => {
+        return axiosInstance
+            .get<FetchResponse<T>>(this.endpoint, config)
+            .then(res => res.data);
+    }
+}
+
+export default APIClient;

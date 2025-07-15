@@ -1,19 +1,30 @@
-import useData from "@/hooks/useData.ts";
+import APIClient from "@/services/api-client.ts";
+import type {FetchResponse} from "@/services/api-client.ts";
 import type {Photo, Rover} from "@/types";
+import {useQuery} from "@tanstack/react-query";
+
+const apiClient = new APIClient<Photo>('/photos');
 
 const usePhotos = (selectedRover: Rover | null, selectedDate: Date | null) => {
+    const formattedDate = selectedDate ? selectedDate.toLocaleDateString('en-CA') : ''; // YYYY-MM-DD
 
-    const formattedDate = selectedDate ? selectedDate.toLocaleDateString('en-CA') : '' // YYYY-MM-DD
-
-    console.log(formattedDate)
-    return useData<Photo>('/photos',
-        {
+    const { data, error, isLoading } = useQuery<FetchResponse<Photo>>({
+        queryKey: ['photos', selectedRover?.name, formattedDate],
+        queryFn: () => apiClient.getAll({
             params: {
                 rover: selectedRover?.name,
                 ...(formattedDate && { date: formattedDate })
             }
-        },
-        [selectedRover, selectedDate])
-}
+        }),
+        enabled: !!selectedRover?.name, // Only run query when rover is selected
+        staleTime: 5 * 60 * 1000, // 5 minutes
+    });
 
-export default usePhotos
+    return {
+        data: data?.results || [],
+        error: error?.message,
+        loading: isLoading
+    };
+};
+
+export default usePhotos;
