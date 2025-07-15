@@ -1,14 +1,10 @@
 import {List, Stack, Heading, Link, Drawer, Portal, CloseButton, IconButton} from "@chakra-ui/react"
 import { LuBot, LuRocket, LuSatellite, LuRadar, LuPanelsTopLeft } from "react-icons/lu"
-import { useState } from "react"
+import {useContext, useState} from "react"
 import type {IconType} from "react-icons";
 import type {Rover} from "@/types";
-
-interface Props {
-    rovers: Rover[];
-    selectedRover: Rover | null;
-    onSelectRover: (rover: Rover) => void;
-}
+import {NasaCtx} from "@/contexts/nasaCtx.ts";
+import {NasaActionTypes} from "@/reducers/nasaReducer.ts";
 
 // Mapping object to assign specific icons to each rover by its name
 const roverIcons: Record<string, IconType> = {
@@ -18,11 +14,13 @@ const roverIcons: Record<string, IconType> = {
     'default': LuRadar,
 }
 
-const RoverList = ({rovers, selectedRover, onSelectRover}: Props) => {
+const RoverList = () => {
+    const { nasaCtxData: {selectedRover, rovers}, nasaCtxDispatcher } = useContext(NasaCtx)
+
     const [isOpen, setIsOpen] = useState(false);
 
     const handleRoverSelect = (rover: Rover) => {
-        onSelectRover(rover);
+        nasaCtxDispatcher({ type: NasaActionTypes.SIMPLE_APPEND, payload: { selectedRover: rover}});
         setIsOpen(false); // Close the drawer
     };
 
@@ -45,7 +43,7 @@ const RoverList = ({rovers, selectedRover, onSelectRover}: Props) => {
                             <Stack align="flex-start">
                                 <Heading size="sm" fontWeight="bold">Rovers</Heading>
                                 <List.Root gap="2" variant="plain" align="center">
-                                    {rovers.map(rover => {
+                                    {rovers?.map(rover => {
                                         const RoverIcon = roverIcons[rover.name] || roverIcons.default;
                                         const isSelected = selectedRover?.id === rover.id;
                                         return (
