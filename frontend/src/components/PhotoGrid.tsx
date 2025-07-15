@@ -8,16 +8,29 @@ import type {Rover} from "@/types";
 
 interface Props {
     selectedRover: Rover | null;
+    selectedDate: Date | null;
 }
 
-const PhotoGrid = ({selectedRover}: Props) => {
+const PhotoGrid = ({selectedRover, selectedDate}: Props) => {
 
-    if (!selectedRover) return null; // Guard clause
+    console.log('****************************************************')
+    console.log(typeof selectedRover)
+    console.log(selectedRover?.name)
+    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++')
 
-    const {data, error, loading} = usePhotos(selectedRover)
+    if (!selectedRover) return;
+
+    const {data, error, loading} = usePhotos(selectedRover, selectedDate)
     const skeletons = [1, 2, 3, 4, 5, 6]
 
+    // console.log('****************************************************')
+    // console.log('Selected rover:', selectedRover)
+    // console.log('Selected date:', selectedDate)
+    // console.log('****************************************************')
+
     if (error) return <AlertBox status="error" description={error} />
+
+
 
     return (
         <SimpleGrid
@@ -31,7 +44,7 @@ const PhotoGrid = ({selectedRover}: Props) => {
                     </PhotoCardContainer>
                 ))
             }
-            {data.map((photo) => (
+            {data && data.map((photo) => (
                     <PhotoCardContainer key={photo.id}>
                         <PhotoCard photo={photo} />
                     </PhotoCardContainer>
