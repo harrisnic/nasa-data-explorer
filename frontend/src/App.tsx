@@ -6,16 +6,20 @@ import {useEffect, useState} from "react";
 import type {Rover} from "@/types";
 import useRovers from "@/hooks/useRovers.ts";
 import AlertBox from "@/components/AlertBox.tsx";
+import DateSelector from "@/components/DateSelector.tsx";
 
 function App() {
-
     const { data: rovers, error, loading } = useRovers();
+
     const [selectedRover, setSelectedRover] = useState<Rover | null>(null)
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
     // Preselect first rover when available
     useEffect(() => {
-        if (rovers.length > 0 && !selectedRover) setSelectedRover(rovers[0]);
-    }, [rovers, selectedRover]);
+        if (rovers?.length > 0 && !selectedRover) {
+            setSelectedRover(rovers[0]);
+        }
+    }, [rovers]);
 
     if (loading) return <Spinner m="6"/>;
     if (error) {
@@ -29,11 +33,12 @@ function App() {
     return (
         <Grid
             templateAreas={{
-                base: `"nav" "main"`,
-                lg: `"nav nav" "aside main"`}}
+                base: `"nav nav" "aside aside" "main main"`,
+                lg: `"nav nav" "aside main"`
+            }}
             templateColumns={{
                 base: "1fr",
-                lg: "200px 1fr"
+                lg: "80px 1fr"
             }}
         >
 
@@ -41,16 +46,15 @@ function App() {
             <NavBar/>
         </GridItem>
 
-        <GridItem hideBelow="lg" area="aside">
+        <GridItem area="aside" p="3">
             <RoverList rovers={rovers} selectedRover={selectedRover} onSelectRover={setSelectedRover}/>
         </GridItem>
 
         <GridItem area="main">
-            <PhotoGrid selectedRover={selectedRover}/>
+            <DateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
+            <PhotoGrid selectedRover={selectedRover} selectedDate={selectedDate} />
         </GridItem>
-
     </Grid>)
-
 }
 
 export default App
