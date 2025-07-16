@@ -13,7 +13,11 @@ const PhotoCardContainer = ({children}: Props) => {
             borderWidth="1px"
             borderRadius="md"
             shadow="sm"
-            _hover={{shadow: "md"}}
+            _hover={{
+                shadow: "md",
+                transform: "scale(1.025)",
+                transition: "transform .15s ease-in"
+            }}
         >
             {children}
         </Box>

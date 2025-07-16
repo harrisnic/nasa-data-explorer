@@ -4,32 +4,25 @@ import PhotoCard from "./PhotoCard.tsx";
 import PhotoCardSkeleton from "@/components/PhotoCardSkeleton.tsx";
 import PhotoCardContainer from "@/components/PhotoCardContainer.tsx";
 import AlertBox from "@/components/AlertBox.tsx";
-import type {Rover} from "@/types";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {NasaCtx} from "@/contexts/nasaCtx.ts";
-
-interface Props {
-    selectedRover: Rover | null;
-    selectedDate: Date | null;
-}
+import {NasaActionTypes} from "@/reducers/nasaReducer.ts";
 
 const PhotoGrid = () => {
 
-    const { nasaCtxData: {selectedRover, selectedDate}} = useContext(NasaCtx)
-
-    // if (!selectedRover) return;
-
-    console.log('*********************')
-    console.log(selectedRover)
-    console.log(selectedDate)
-    console.log('*********************')
+    const { nasaCtxData: {selectedRover, selectedDate}, nasaCtxDispatcher} = useContext(NasaCtx)
 
     const {data, error, loading} = usePhotos(selectedRover!, selectedDate!)
     const skeletons = [1, 2, 3, 4, 5, 6]
 
+    // Add photos to context when data is available to share with other components (PhotoDetailsPage.tsx)
+    useEffect(() => {
+        if (data && data.length > 0) {
+            nasaCtxDispatcher({ type: NasaActionTypes.SIMPLE_APPEND, payload: { photos: data}});
+        }
+    }, [data?.length, nasaCtxDispatcher]);
+
     if (error) return <AlertBox status="error" description={error} />
-
-
 
     return (
         <SimpleGrid
@@ -54,4 +47,3 @@ const PhotoGrid = () => {
 }
 
 export default PhotoGrid
-1

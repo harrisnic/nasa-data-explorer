@@ -8,26 +8,26 @@ import {NasaActionTypes} from "@/reducers/nasaReducer.ts";
 
 const StyledDatePickerWrapper = styled(Box)`
     .flatpickr-input {
-        width: 140px;
+        width: 180px;
         padding: 8px 12px;
-        border: 1px solid #e2e8f0;
+        border: 1px solid #f472b6;
         border-radius: 6px;
         font-size: 14px;
         transition: border-color 0.2s, box-shadow 0.2s;
         background-color: white;
-    
+
         &:focus {
-          border-color: #3182ce;
-          box-shadow: 0 0 0 1px #3182ce;
-          outline: none;
+            border-color: #db2777;
+            box-shadow: 0 0 5px 2px rgba(219, 39, 119, 0.2);
+            outline: none;
         }
-    
+
         &:hover {
-          border-color: #cbd5e0;
+            border-color: #db2777;
         }
-        
+
         &::placeholder {
-          color: #a0aec0;
+            color: #71717a;
         }
     }
 `;
@@ -36,20 +36,23 @@ const DateSelector = () => {
     const { nasaCtxData: {selectedDate}, nasaCtxDispatcher } = useContext(NasaCtx)
 
     return (
-        <StyledDatePickerWrapper>
-            <Flatpickr
-                placeholder="Select a date"
-                value={selectedDate ?? ""}
-                onChange={(selectedDates) => {
-                    const date = selectedDates[0] || null;
-                    nasaCtxDispatcher({ type: NasaActionTypes.SIMPLE_APPEND, payload: { selectedDate: date}});
-                }}
-                options={{
-                    dateFormat: "Y-m-d",
-                    enableTime: false,
-                }}
-            />
-        </StyledDatePickerWrapper>
+        <Box pl={6}>
+            <StyledDatePickerWrapper>
+                <Flatpickr
+                    placeholder="Select a date"
+                    value={selectedDate ?? ""}
+                    onChange={(selectedDates) => {
+                        const date = selectedDates[0] || null;
+                        nasaCtxDispatcher({ type: NasaActionTypes.SIMPLE_APPEND, payload: { selectedDate: date}});
+                    }}
+                    options={{
+                        dateFormat: "Y-m-d",
+                        enableTime: false,
+                    }}
+                />
+            </StyledDatePickerWrapper>
+        </Box>
+
     );
 };
 

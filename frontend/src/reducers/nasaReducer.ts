@@ -1,3 +1,5 @@
+import type {Photo} from "@/types";
+
 export interface Rover {
     id: number;
     name: string;
@@ -21,6 +23,7 @@ export interface NasaState {
     selectedRover?: Rover;
     selectedDate?: Date | null;
     rovers?: Rover[];
+    photos?: Photo[];
 }
 
 export interface NasaAction {
