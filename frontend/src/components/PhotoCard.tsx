@@ -1,7 +1,8 @@
-import {Box, Flex, HStack, Stack, Text, Icon, Badge} from "@chakra-ui/react";
-import {LuCalendarDays, LuOrbit, LuFocus, LuBot, LuBattery, LuBatteryFull} from "react-icons/lu";
+import {Box, Flex, HStack, Stack, Text, Icon} from "@chakra-ui/react";
+import {LuCalendarDays, LuOrbit, LuAperture} from "react-icons/lu";
 import type {Photo} from "@/types";
 import PhotoImage from "@/components/PhotoImage.tsx";
+import {Link} from "react-router-dom";
 
 interface Props {
     photo: Photo;
@@ -10,10 +11,12 @@ interface Props {
 const PhotoCard = ({photo}: Props) => {
     return (
         <Box>
-            <PhotoImage src={photo.img_src} alt={photo.camera.full_name} />
+            <Box height="220px" overflow="hidden">
+                <PhotoImage src={photo.img_src} alt={photo.camera.full_name} />
+            </Box>
 
-            <Box p="2" spaceY="2">
-                <Flex gap="4" justify="space-between">
+            <Box p="2">
+                <Flex justify="space-between">
                     <Stack gap={0}>
                         <HStack gap={1}>
                             <Icon color="pink.400">
@@ -36,39 +39,16 @@ const PhotoCard = ({photo}: Props) => {
                 </Flex>
             </Box>
 
-            <Box p="2" spaceY="2">
-                <Stack gap={0}>
-                    <HStack gap={1}>
-                        <Icon color="pink.400">
-                            <LuFocus />
-                        </Icon>
-                        <Text textStyle="xs">Camera:</Text>
-                    </HStack>
-                    <Text textStyle="sm">{photo.camera.full_name}</Text>
-                </Stack>
+            <Box p="2">
+                <HStack>
+                    <Icon color="pink.400">
+                        <LuAperture />
+                    </Icon>
+                    <Text color="pink.400">
+                        <Link to={`photos/${photo.id}`}>Photo details</Link>
+                    </Text>
+                </HStack>
             </Box>
-
-            <Box p="4" spaceY="2" bg="gray.100">
-                <Flex gap="4" justify="space-between">
-                    <Stack gap={0}>
-                        <HStack gap={1}>
-                            <Icon color="pink.400">
-                                <LuBot />
-                            </Icon>
-                            <Text textStyle="xs">Rover:</Text>
-                        </HStack>
-                        <Text textStyle="sm">{photo.rover.name}</Text>
-                    </Stack>
-
-                    <Stack gap={0}>
-                        <Badge variant="solid" colorPalette={photo.rover.status === "active" ? "green" : "pink"} size="md">
-                            {photo.rover.status === "active" ? <Icon color="green.400" size="md"><LuBatteryFull /></Icon> : <Icon color="pink.400" size="md"><LuBattery /></Icon>}
-                            {photo.rover.status}
-                        </Badge>
-                    </Stack>
-                </Flex>
-            </Box>
-
         </Box>
     )
 }

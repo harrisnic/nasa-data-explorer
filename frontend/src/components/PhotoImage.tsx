@@ -17,7 +17,7 @@ const PhotoImage = ({ src, alt }: PhotoImageProps) => {
     };
 
     return (
-        <Image src={imgSrc} alt={alt} onError={handleError} />
+        <Image minHeight="220px" fit="cover" src={imgSrc} alt={alt} onError={handleError} />
     );
 };
 

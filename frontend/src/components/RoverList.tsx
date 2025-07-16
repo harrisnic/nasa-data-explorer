@@ -1,4 +1,4 @@
-import {List, Stack, Heading, Link, Drawer, Portal, CloseButton, IconButton} from "@chakra-ui/react"
+import {List, Stack, Box, Link, Drawer, Portal, CloseButton, IconButton} from "@chakra-ui/react"
 import { LuBot, LuRocket, LuSatellite, LuRadar, LuPanelsTopLeft } from "react-icons/lu"
 import {useContext, useState} from "react"
 import type {IconType} from "react-icons";
@@ -37,19 +37,29 @@ const RoverList = () => {
             </Drawer.Trigger>
             <Portal>
                 <Drawer.Backdrop />
-                <Drawer.Positioner padding="4">
-                    <Drawer.Content rounded="md">
-                        <Drawer.Body p="5">
-                            <Stack align="flex-start">
-                                <Heading size="sm" fontWeight="bold">Rovers</Heading>
-                                <List.Root gap="2" variant="plain" align="center">
+                <Drawer.Positioner padding="5">
+                    <Drawer.Content rounded="md" width="auto">
+                        <Drawer.Body px="8">
+                            <Stack align="center" justify="center" height="100%">
+
+                                <List.Root gap="6" variant="plain" align="center">
                                     {rovers?.map(rover => {
                                         const RoverIcon = roverIcons[rover.name] || roverIcons.default;
                                         const isSelected = selectedRover?.id === rover.id;
                                         return (
-                                            <List.Item key={rover.id}>
+                                            <List.Item key={rover.id} gap="2">
                                                 <List.Indicator asChild color={isSelected ? "pink.600" : "gray.500"}>
-                                                    <RoverIcon/>
+                                                    <Box
+                                                        p="3"
+                                                        bg={isSelected ? "pink.200" : "gray.200"}
+                                                        _dark={{ bg: isSelected ? "pink.900" : "gray.700" }}
+                                                        rounded="full"
+                                                        display="flex"
+                                                        alignItems="center"
+                                                        justifyContent="center"
+                                                    >
+                                                        <RoverIcon size="32px"/>
+                                                    </Box>
                                                 </List.Indicator>
                                                 <Link onClick={() => handleRoverSelect(rover)} variant="plain" color={isSelected ? "pink.600" : "gray.500"}>
                                                     {rover.name}
@@ -58,6 +68,7 @@ const RoverList = () => {
                                         )
                                     })}
                                 </List.Root>
+
                             </Stack>
                         </Drawer.Body>
                         <Drawer.CloseTrigger asChild>
