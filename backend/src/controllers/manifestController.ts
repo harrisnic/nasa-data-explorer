@@ -3,7 +3,7 @@ import { validationResult } from 'express-validator';
 import {manifestValidationRules} from "../validation";
 import {NotFoundError} from "../errors";
 import {Manifest} from "../types";
-import {ManifestModel} from "../models/Manifest";
+import {ManifestService} from "../services/manifestService";
 
 export class ManifestController {
 
@@ -22,7 +22,7 @@ export class ManifestController {
         try {
             const { rover }: { rover: string } = req.query;
 
-            const manifest: Manifest | undefined = await ManifestModel.findByRoverName(rover);
+            const manifest: Manifest = await ManifestService.findByRoverName(rover);
 
             res.status(200).json({
                 success: true,

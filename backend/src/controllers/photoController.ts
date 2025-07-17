@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { PhotoModel } from '../models/Photo';
 import { validationResult } from 'express-validator';
 import {photoValidationRules} from "../validation";
 import {NotFoundError} from "../errors";
 import {Photo} from "../types";
+import {PhotoService} from "../services/photoService";
 
 export class PhotoController {
 
@@ -11,6 +11,7 @@ export class PhotoController {
 
     static async getPhotosByRoverAndDate(req: Request, res: Response): Promise<void> {
         const errors = validationResult(req);
+
         if (!errors.isEmpty()) {
             res.status(400).json({
                 success: false,
@@ -24,9 +25,9 @@ export class PhotoController {
             let photos: Photo[] | [];
 
             if (date) {
-                photos = await PhotoModel.findByRoverAndDate(rover, date);
+                photos = await PhotoService.findByRoverAndDate(rover, date);
             } else {
-                photos = await PhotoModel.findLatestByRoverName(rover)
+                photos = await PhotoService.findLatestByRoverName(rover)
             }
 
             res.status(200).json({

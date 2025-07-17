@@ -4,8 +4,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import rateLimit from "express-rate-limit";
-import { errorHandler } from './middleware/errorHandler';
-import { cacheMiddleware } from './middleware/cacheMiddleware';
+import { errorHandler } from './middlewares/errorHandler';
+import { cacheMiddleware } from './middlewares/cacheMiddleware';
 import { ApiResponse } from './types';
 import {cacheService} from "./services/cacheService";
 import roverRoutes from './routes/roverRoutes';
@@ -40,6 +40,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Routes cache for 1 hour
+
 app.use('/api/rovers', cacheMiddleware(config.server.cache.duration), roverRoutes);
 app.use('/api/photos', cacheMiddleware(config.server.cache.duration), photoRoutes);
 app.use('/api/manifests', cacheMiddleware(config.server.cache.duration), manifestRoutes);
@@ -69,7 +70,7 @@ app.post('/api/utils/flush-cache', (req: Request, res: Response) => {
     res.json(response);
 });
 
-// Error handling middleware
+// Error handling middlewares
 app.use(errorHandler);
 
 // Start server
