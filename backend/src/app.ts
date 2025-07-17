@@ -3,13 +3,14 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import roverRoutes from './routes/roverRoutes';
-import { errorHandler } from './middleware/errorHandler';
-import { ApiResponse } from './types';
-import photoRoutes from "./routes/photoRoutes";
 import rateLimit from "express-rate-limit";
+import { errorHandler } from './middleware/errorHandler';
 import { cacheMiddleware } from './middleware/cacheMiddleware';
+import { ApiResponse } from './types';
 import {cacheService} from "./services/cacheService";
+import roverRoutes from './routes/roverRoutes';
+import photoRoutes from "./routes/photoRoutes";
+import manifestRoutes from "./routes/manifestRoutes";
 
 const app: Application = express();
 
@@ -41,6 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes cache for 1 hour
 app.use('/api/rovers', cacheMiddleware(config.server.cache.duration), roverRoutes);
 app.use('/api/photos', cacheMiddleware(config.server.cache.duration), photoRoutes);
+app.use('/api/manifests', cacheMiddleware(config.server.cache.duration), manifestRoutes);
 
 // Health check endpoint, cached for 5 mins
 app.get('/', cacheMiddleware(300), (req: Request, res: Response) => {
