@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { ApiResponse, Rover } from '../types';
-import {RoverModel} from "../models/Rover";
+import {RoverService} from "../services/roverService";
 
 export class RoverController {
 
     static async getAllRovers(req: Request, res: Response): Promise<void> {
         try {
-            const rovers: Rover[] = await RoverModel.findAll();
+            const rovers: Rover[] = await RoverService.findAll();
 
             const response: ApiResponse<Rover[]> = {
                 success: true,
@@ -27,7 +27,7 @@ export class RoverController {
     static async getRoverByName(req: Request, res: Response): Promise<void> {
         try {
             const name = req.params.name;
-            const rover = await RoverModel.findByName(name);
+            const rover = await RoverService.findByName(name);
 
             if (!rover) {
                 const response: ApiResponse<never> = {

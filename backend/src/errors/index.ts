@@ -1,2 +1,2 @@
-export * from './BaseError';
-export * from './NotFoundError';
+export * from './baseError';
+export * from './notFoundError';

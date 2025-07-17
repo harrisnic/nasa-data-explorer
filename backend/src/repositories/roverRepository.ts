@@ -9,14 +9,14 @@ interface NasaRoverApiResponse {
     rover: Rover;
 }
 
-export class RoverModel {
+export class RoverRepository {
 
     static async findAll(): Promise<Rover[]> {
         const response = await api.get<NasaRoversApiResponse>('/rovers');
         return response.data.rovers;
     }
 
-    static async findByName(name: string): Promise<Rover | undefined> {
+    static async findByName(name: string): Promise<Rover> {
         const response = await api.get<NasaRoverApiResponse>(`/rovers/${name.toLowerCase()}`);
         return response.data.rover;
     }
