@@ -19,7 +19,7 @@ function Homepage() {
         }
     }, [rovers]);
 
-    if (loading) return <Spinner m="6"/>;
+    if (loading) return <Spinner color="pink.600" m="6"/>;
     if (error) {
         return (
             <Center minH="100vh">

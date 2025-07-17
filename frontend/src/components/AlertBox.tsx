@@ -11,7 +11,7 @@ const AlertBox = ({status, description, maxW="300px;"}: Props) => {
         <Alert.Root status={status} maxW={maxW}>
             <Alert.Indicator />
             <Alert.Content>
-                <Alert.Description>
+                <Alert.Description textAlign="center">
                     {description}
                 </Alert.Description>
             </Alert.Content>
