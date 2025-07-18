@@ -8,7 +8,7 @@ const Layout = () => {
     return (
         <>
             <Header/>
-            <Box display={{ base: "block", lg: "none" }} m="6">
+            <Box display={{ base: "block", lg: "none" }} ml="6" mb="6">
                 <RoverList/>
             </Box>
             <Outlet/>

@@ -1,10 +1,12 @@
 import "flatpickr/dist/themes/dark.css";
 import Flatpickr from "react-flatpickr";
-import { Box } from "@chakra-ui/react";
+import {Box, HStack} from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import {useContext} from "react";
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
+import RoverStatus from "@/components/RoverStatus.tsx";
+import RoverStatusDialog from "@/components/RoverStatusDialog.tsx";
 
 const StyledDatePickerWrapper = styled(Box)`
     .flatpickr-input {
@@ -36,23 +38,30 @@ const DateSelector = () => {
     const { nasaCtxData: {selectedDate}, nasaCtxDispatcher } = useContext(NasaCtx)
 
     return (
-        <Box pl={6}>
-            <StyledDatePickerWrapper>
-                <Flatpickr
-                    placeholder="Select a date"
-                    value={selectedDate ?? ""}
-                    onChange={(selectedDates) => {
-                        const date = selectedDates[0] || null;
-                        nasaCtxDispatcher({ type: NasaActionTypes.SIMPLE_APPEND, payload: { selectedDate: date}});
-                    }}
-                    options={{
-                        dateFormat: "Y-m-d",
-                        enableTime: false,
-                    }}
-                />
-            </StyledDatePickerWrapper>
-        </Box>
-
+        <HStack justifyContent="space-between" px="6">
+            <Box>
+                <StyledDatePickerWrapper>
+                    <Flatpickr
+                        placeholder="Select a date"
+                        value={selectedDate ?? ""}
+                        onChange={(selectedDates) => {
+                            const date = selectedDates[0] || null;
+                            nasaCtxDispatcher({ type: NasaActionTypes.SIMPLE_APPEND, payload: { selectedDate: date}});
+                        }}
+                        options={{
+                            dateFormat: "Y-m-d",
+                            enableTime: false,
+                        }}
+                    />
+                </StyledDatePickerWrapper>
+            </Box>
+            <Box display={{ base: "none", lg: "block" }}>
+                <RoverStatus />
+            </Box>
+            <Box display={{ base: "block", lg: "none" }}>
+                <RoverStatusDialog/>
+            </Box>
+        </HStack>
     );
 };
 
