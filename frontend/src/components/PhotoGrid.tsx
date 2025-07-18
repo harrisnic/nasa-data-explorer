@@ -5,8 +5,8 @@ import PhotoCardSkeleton from "@/components/PhotoCardSkeleton.tsx";
 import PhotoCardContainer from "@/components/PhotoCardContainer.tsx";
 import AlertBox from "@/components/AlertBox.tsx";
 import {useContext, useEffect} from "react";
-import {NasaCtx} from "@/contexts/nasaCtx.ts";
-import {NasaActionTypes} from "@/reducers/nasaReducer.ts";
+import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
+import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
 import RoverManifest from "@/components/RoverManifest.tsx";
 
 const PhotoGrid = () => {

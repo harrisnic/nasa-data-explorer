@@ -3,8 +3,8 @@ import Flatpickr from "react-flatpickr";
 import { Box } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import {useContext} from "react";
-import {NasaCtx} from "@/contexts/nasaCtx.ts";
-import {NasaActionTypes} from "@/reducers/nasaReducer.ts";
+import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
+import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
 
 const StyledDatePickerWrapper = styled(Box)`
     .flatpickr-input {
