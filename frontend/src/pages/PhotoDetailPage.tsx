@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {useContext} from "react";
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import type {Photo} from "@/types";
@@ -6,16 +6,27 @@ import PhotoImage from "@/components/PhotoImage.tsx";
 import {Badge, Box, Flex, Grid, GridItem, HStack, Icon, Stack, Text} from "@chakra-ui/react";
 import {LuBattery, LuBatteryFull, LuBot, LuCalendarDays, LuFocus, LuLandPlot, LuOrbit, LuRocket} from "react-icons/lu";
 import BackButton from "@/components/BackButton.tsx";
+import usePhotoById from "@/hooks/usePhotoById.ts";
 
 const PhotoDetailPage = () => {
     const {id} = useParams();
-    const {nasaCtxData: {photos}} = useContext(NasaCtx);
+    const [searchParams] = useSearchParams(); // Note: destructure the array
 
-    // Find the photo by ID (convert string ID to number for comparison)
-    const photo: Photo = photos?.find(photo => photo.id === Number(id));
+    // Get individual parameters
+    const selectedRover = searchParams.get('selectedRover');
+    const selectedDate = searchParams.get('selectedDate');
 
-    if (!photo) {
+
+    const {data, error, loading} = usePhotoById(Number(id), selectedRover, selectedDate)
+
+    console.log("Data",data)
+
+    if (error) {
         return <div>Photo not found</div>;
+    }
+
+    if (loading) {
+        return <div>Loading...</div>;
     }
 
     return (
@@ -35,7 +46,7 @@ const PhotoDetailPage = () => {
 
             <GridItem area="photo" p="3">
                 <Box borderRadius="lg" overflow="hidden">
-                    <PhotoImage src={photo.img_src} alt={photo.camera.full_name} />
+                    <PhotoImage src={data.img_src} alt={data.camera.full_name} />
                 </Box>
             </GridItem>
 
@@ -49,13 +60,13 @@ const PhotoDetailPage = () => {
                                 </Icon>
                                 <Text textStyle="xs">Rover:</Text>
                             </HStack>
-                            <Text textStyle="sm">{photo.rover.name}</Text>
+                            <Text textStyle="sm">{data.rover.name}</Text>
                         </Stack>
 
                         <Stack gap={0}>
-                            <Badge variant="solid" colorPalette={photo.rover.status === "active" ? "green" : "pink"} size="md">
-                                {photo.rover.status === "active" ? <Icon color="green.400" size="md"><LuBatteryFull /></Icon> : <Icon color="pink.400" size="md"><LuBattery /></Icon>}
-                                {photo.rover.status}
+                            <Badge variant="solid" colorPalette={data.rover.status === "active" ? "green" : "pink"} size="md">
+                                {data.rover.status === "active" ? <Icon color="green.400" size="md"><LuBatteryFull /></Icon> : <Icon color="pink.400" size="md"><LuBattery /></Icon>}
+                                {data.rover.status}
                             </Badge>
                         </Stack>
                     </Flex>
@@ -67,7 +78,7 @@ const PhotoDetailPage = () => {
                             </Icon>
                             <Text textStyle="xs">Launch Date:</Text>
                         </HStack>
-                        <Text textStyle="sm">{photo.rover.launch_date}</Text>
+                        <Text textStyle="sm">{data.rover.launch_date}</Text>
                     </Stack>
 
                     <Stack gap={0}>
@@ -77,7 +88,7 @@ const PhotoDetailPage = () => {
                             </Icon>
                             <Text textStyle="xs">Landing Date:</Text>
                         </HStack>
-                        <Text textStyle="sm">{photo.rover.landing_date}</Text>
+                        <Text textStyle="sm">{data.rover.landing_date}</Text>
                     </Stack>
                 </Box>
 
@@ -89,7 +100,7 @@ const PhotoDetailPage = () => {
                             </Icon>
                             <Text textStyle="xs">Earth date:</Text>
                         </HStack>
-                        <Text textStyle="sm">{photo.earth_date}</Text>
+                        <Text textStyle="sm">{data.earth_date}</Text>
                     </Stack>
                 </Box>
 
@@ -101,7 +112,7 @@ const PhotoDetailPage = () => {
                             </Icon>
                             <Text textStyle="xs">SOL:</Text>
                         </HStack>
-                        <Text textStyle="sm">{photo.sol}</Text>
+                        <Text textStyle="sm">{data.sol}</Text>
                     </Stack>
                 </Box>
 
@@ -113,7 +124,7 @@ const PhotoDetailPage = () => {
                             </Icon>
                             <Text textStyle="xs">Camera:</Text>
                         </HStack>
-                        <Text textStyle="sm">{photo.camera.full_name}</Text>
+                        <Text textStyle="sm">{data.camera.full_name}</Text>
                     </Stack>
                 </Box>
             </GridItem>

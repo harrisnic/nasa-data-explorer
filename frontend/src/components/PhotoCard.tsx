@@ -3,12 +3,27 @@ import {LuCalendarDays, LuOrbit, LuAperture} from "react-icons/lu";
 import type {Photo} from "@/types";
 import PhotoImage from "@/components/PhotoImage.tsx";
 import {Link} from "react-router-dom";
+import type {Rover} from "@/stores/nasa/nasaReducer.ts";
+import {useContext} from "react";
+import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 
 interface Props {
     photo: Photo;
 }
 
 const PhotoCard = ({photo}: Props) => {
+    const { nasaCtxData: {selectedRover, selectedDate}} = useContext(NasaCtx);
+    const createSearchParams = () => {
+        const params = new URLSearchParams();
+        if (selectedRover?.name) {
+            params.set('selectedRover', selectedRover.name);
+        }
+        if (selectedDate) {
+            params.set('selectedDate', selectedDate.toLocaleDateString('en-CA'));
+        }
+        return params.toString();
+    };
+
     return (
         <Box>
             <Box height="220px" overflow="hidden">
@@ -45,7 +60,11 @@ const PhotoCard = ({photo}: Props) => {
                         <LuAperture />
                     </Icon>
                     <Text color="pink.400">
-                        <Link to={`photos/${photo.id}`}>Photo details</Link>
+
+                        <Link to={{
+                            pathname: `/photos/${photo.id}`,
+                            search: createSearchParams()
+                        }}>Photo details</Link>
                     </Text>
                 </HStack>
             </Box>
