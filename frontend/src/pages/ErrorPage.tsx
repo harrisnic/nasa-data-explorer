@@ -1,6 +1,6 @@
 import {Flex, Heading, Image,} from "@chakra-ui/react";
 import {isRouteErrorResponse, useRouteError} from "react-router-dom";
-import NavBar from "@/components/NavBar.tsx";
+import Header from "@/components/Header.tsx";
 import Mars from '../assets/mars.jpg'
 
 const ErrorPage = () => {
@@ -8,7 +8,7 @@ const ErrorPage = () => {
 
     return (
         <>
-            <NavBar/>
+            <Header/>
             <Flex justify="center">
                 <Flex gap="4" direction="column" align="center">
                     <Image width="260px" borderRadius="20px" fit="cover" src={Mars} alt="Mars" />

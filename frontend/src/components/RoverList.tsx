@@ -1,16 +1,16 @@
 import {List, Stack, Box, Link, Drawer, Portal, CloseButton, IconButton} from "@chakra-ui/react"
-import { LuBot, LuRocket, LuSatellite, LuRadar, LuPanelsTopLeft } from "react-icons/lu"
+import {LuBot, LuRocket, LuSatellite, LuRadar, LuPanelsTopLeft, LuEclipse} from "react-icons/lu"
 import {useContext, useState} from "react"
 import type {IconType} from "react-icons";
 import type {Rover} from "@/types";
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
 
-// Mapping object to assign specific icons to each rover by its name
 const roverIcons: Record<string, IconType> = {
     'Curiosity': LuBot,
     'Opportunity': LuSatellite,
     'Spirit': LuRocket,
+    'Perseverance': LuEclipse,
     'default': LuRadar,
 }
 
