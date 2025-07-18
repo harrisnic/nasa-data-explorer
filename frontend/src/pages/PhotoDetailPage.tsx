@@ -18,8 +18,6 @@ const PhotoDetailPage = () => {
         return <div>Photo not found</div>;
     }
 
-    console.log(photo);
-
     return (
         <Grid
             templateAreas={{
