@@ -1,28 +1,24 @@
-import { Request, Response } from 'express';
+import {NextFunction, Request, Response} from 'express';
 import { validationResult } from 'express-validator';
 import {photoValidationRules} from "../validation";
-import {NotFoundError} from "../errors";
-import {Photo} from "../types";
+import {BadRequestError} from "../errors";
+import {ApiResponse, Photo} from "../types";
 import {PhotoService} from "../services/photoService";
 
 export class PhotoController {
 
     static validateRoverAndDate = photoValidationRules.getByRoverAndDate
 
-    static async getPhotosByRoverAndDate(req: Request, res: Response): Promise<void> {
-        const errors = validationResult(req);
-
-        if (!errors.isEmpty()) {
-            res.status(400).json({
-                success: false,
-                error: 'Invalid parameters: ' + errors.array()[0].msg
-            });
-            return;
-        }
-
+    static async getPhotosByRoverAndDate(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
+
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                throw new BadRequestError(`Invalid parameters: ${errors.array()[0].msg}`);
+            }
+
             const { rover, date }: {rover: string, date: string | null} = req.query;
-            let photos: Photo[] | [];
+            let photos: Photo[];
 
             if (date) {
                 photos = await PhotoService.findByRoverAndDate(rover, date);
@@ -30,29 +26,15 @@ export class PhotoController {
                 photos = await PhotoService.findLatestByRoverName(rover)
             }
 
-            res.status(200).json({
+            const response: ApiResponse<Photo[]> = {
                 success: true,
                 results: photos,
                 message: 'Rover photos retrieved successfully'
-            });
+            };
+            res.status(200).json(response);
 
         } catch (error: unknown) {
-            if (error instanceof NotFoundError) {
-                res.status(error.statusCode).json({
-                    success: false,
-                    error: error.message
-                });
-            } else if (error instanceof Error) {
-                res.status(500).json({
-                    success: false,
-                    error: error.message
-                });
-            } else {
-                res.status(500).json({
-                    success: false,
-                    error: 'An unknown error occurred'
-                });
-            }
+            next(error);
         }
     }
 

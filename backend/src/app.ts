@@ -4,13 +4,11 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import rateLimit from "express-rate-limit";
-import { errorHandler } from './middlewares/errorHandler';
+import { errorHandlerMiddleware } from './middlewares/errorHandlerMiddleware';
 import { cacheMiddleware } from './middlewares/cacheMiddleware';
 import { ApiResponse } from './types';
 import {cacheService} from "./services/cacheService";
-import roverRoutes from './routes/roverRoutes';
-import photoRoutes from "./routes/photoRoutes";
-import manifestRoutes from "./routes/manifestRoutes";
+import * as routes from './routes';
 
 const app: Application = express();
 
@@ -41,9 +39,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes cache for 1 hour
 
-app.use('/api/rovers', cacheMiddleware(config.server.cache.duration), roverRoutes);
-app.use('/api/photos', cacheMiddleware(config.server.cache.duration), photoRoutes);
-app.use('/api/manifests', cacheMiddleware(config.server.cache.duration), manifestRoutes);
+app.use('/api/rovers', cacheMiddleware(config.server.cache.duration), routes.roverRoutes);
+app.use('/api/photos', cacheMiddleware(config.server.cache.duration), routes.photoRoutes);
+app.use('/api/manifests', cacheMiddleware(config.server.cache.duration), routes.manifestRoutes);
 
 // Health check endpoint, cached for 5 mins
 app.get('/', cacheMiddleware(300), (req: Request, res: Response) => {
@@ -71,7 +69,7 @@ app.post('/api/utils/flush-cache', (req: Request, res: Response) => {
 });
 
 // Error handling middlewares
-app.use(errorHandler);
+app.use(errorHandlerMiddleware);
 
 // Start server
 const server = app.listen(config.server.port, () => {
