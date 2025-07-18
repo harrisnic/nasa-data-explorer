@@ -2,13 +2,13 @@ import {config} from "./config/config";
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import morgan from 'morgan';
 import rateLimit from "express-rate-limit";
 import { errorHandlerMiddleware } from './middlewares/errorHandlerMiddleware';
 import { cacheMiddleware } from './middlewares/cacheMiddleware';
 import { ApiResponse } from './types';
 import {cacheService} from "./services/cacheService";
 import * as routes from './routes';
+import {loggingMiddleware} from "./middlewares/loggingMiddleware";
 
 const app: Application = express();
 
@@ -33,7 +33,10 @@ app.use(cors({
     credentials: true
 
 })); // Enable CORS
-app.use(morgan(config.isProduction ? 'combined' : 'dev'));
+
+// Logs to @/logs/access.log
+app.use(loggingMiddleware);
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
