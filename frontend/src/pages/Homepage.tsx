@@ -31,22 +31,20 @@ function Homepage() {
     return (
         <Grid
             templateAreas={{
-                base: `"aside aside" "main main"`,
-                lg: `"aside main"`
+                base: `"main"`,
+                lg: `"main"`
             }}
             templateColumns={{
                 base: "1fr",
-                lg: "80px 1fr"
+                lg: "1fr"
             }}
         >
-            <GridItem area="aside" p="3">
-                <RoverList />
-            </GridItem>
 
             <GridItem area="main">
                 <DateSelector />
                 <PhotoGrid />
             </GridItem>
+
         </Grid>
     )
 }
