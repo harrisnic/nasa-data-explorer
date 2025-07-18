@@ -3,8 +3,8 @@ import { LuBot, LuRocket, LuSatellite, LuRadar, LuPanelsTopLeft } from "react-ic
 import {useContext, useState} from "react"
 import type {IconType} from "react-icons";
 import type {Rover} from "@/types";
-import {NasaCtx} from "@/contexts/nasaCtx.ts";
-import {NasaActionTypes} from "@/reducers/nasaReducer.ts";
+import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
+import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
 
 // Mapping object to assign specific icons to each rover by its name
 const roverIcons: Record<string, IconType> = {

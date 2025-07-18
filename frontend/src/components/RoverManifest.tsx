@@ -1,7 +1,7 @@
 import {Box, Timeline, Text, HStack, Stack, Flex, Icon, Badge, Spinner, VStack} from "@chakra-ui/react";
 import AlertBox from "@/components/AlertBox.tsx";
 import {useContext} from "react";
-import {NasaCtx} from "@/contexts/nasaCtx.ts";
+import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import useManifests from "@/hooks/useManifests.ts";
 import {LuBattery, LuBatteryFull, LuBot, LuLandPlot, LuPickaxe, LuRocket } from "react-icons/lu";
 

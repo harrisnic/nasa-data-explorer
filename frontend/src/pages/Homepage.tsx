@@ -5,8 +5,8 @@ import {useContext, useEffect} from "react";
 import AlertBox from "@/components/AlertBox.tsx";
 import DateSelector from "@/components/DateSelector.tsx";
 import useRovers from "@/hooks/useRovers.ts";
-import {NasaCtx} from "@/contexts/nasaCtx.ts";
-import {NasaActionTypes} from "@/reducers/nasaReducer.ts";
+import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
+import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
 
 function Homepage() {
     const { data: rovers, error, loading } = useRovers();

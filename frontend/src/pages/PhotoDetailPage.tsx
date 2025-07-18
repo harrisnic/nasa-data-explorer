@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import {useContext} from "react";
-import {NasaCtx} from "@/contexts/nasaCtx.ts";
+import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import type {Photo} from "@/types";
 import PhotoImage from "@/components/PhotoImage.tsx";
 import {Badge, Box, Flex, Grid, GridItem, HStack, Icon, Stack, Text} from "@chakra-ui/react";

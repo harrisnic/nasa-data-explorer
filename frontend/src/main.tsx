@@ -2,7 +2,7 @@ import {FC, ReactNode, StrictMode} from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from "@/components/ui/provider"
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import NasaCtxProvider from "@/providers/NasaCtxProvider.tsx";
+import NasaCtxProvider from "@/stores/nasa/NasaCtxProvider.tsx";
 import {RouterProvider} from "react-router-dom";
 import router from "@/routes.tsx";
 

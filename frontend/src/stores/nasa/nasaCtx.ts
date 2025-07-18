@@ -1,4 +1,4 @@
-import type {NasaAction, NasaState} from "@/reducers/nasaReducer.ts";
+import type {NasaAction, NasaState} from "@/stores/nasa/nasaReducer.ts";
 import type {Dispatch} from "react";
 import {createContext} from "react";
 
