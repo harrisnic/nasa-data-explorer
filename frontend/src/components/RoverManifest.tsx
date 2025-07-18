@@ -17,8 +17,8 @@ const RoverManifest = () => {
         <VStack>
             { loading && <Spinner size="xs" color="pink.600" m="5"/> }
             { !loading && data &&
-                <Box maxW="400px;">
-                    <Flex gap="14" mb="6" justify="space-between" >
+                <Box>
+                    <Flex gap="6" mb="6" justify="space-between" >
                         <Stack gap={0}>
                             <HStack gap={1}>
                                 <Icon color="pink.400">

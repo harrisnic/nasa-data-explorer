@@ -1,6 +1,5 @@
 import {Center, Grid, GridItem, Spinner} from "@chakra-ui/react";
 import PhotoGrid from "@/components/PhotoGrid.tsx";
-import RoverList from "@/components/RoverList.tsx";
 import {useContext, useEffect} from "react";
 import AlertBox from "@/components/AlertBox.tsx";
 import DateSelector from "@/components/DateSelector.tsx";

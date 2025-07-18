@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 const Header = () => {
     return (
-        <HStack justifyContent="space-between" padding="6">
+        <HStack justifyContent="space-between" padding="6" mb="8">
             <HStack >
                 <Link to="/">
                     <Image me="12" boxSize="60px" src={NasaLogo} alt="NASA logo" />
