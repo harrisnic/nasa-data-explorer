@@ -4,6 +4,7 @@ import Layout from "@/pages/Layout.tsx";
 import Homepage from "@/pages/Homepage.tsx";
 import PhotoDetailPage from "@/pages/PhotoDetailPage.tsx";
 import ErrorPage from "@/pages/ErrorPage.tsx";
+import NasaBotPage from "@/pages/NasaBotPage.tsx";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Homepage/> },
             { path: 'photos/:id', element: <PhotoDetailPage/> },
+            { path: 'nasa-bot/', element: <NasaBotPage/> },
         ]
     }
 ] as RouteObject[])
