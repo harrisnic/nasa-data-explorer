@@ -2,6 +2,7 @@ import Header from "@/components/Header.tsx";
 import {Outlet} from "react-router-dom";
 import RoverList from "@/components/RoverList.tsx";
 import {Box} from "@chakra-ui/react";
+import BackToTopButton from "@/components/BackToTopButton.tsx";
 
 const Layout = () => {
     return (
@@ -11,6 +12,7 @@ const Layout = () => {
                 <RoverList/>
             </Box>
             <Outlet/>
+            <BackToTopButton/>
         </>
     )
 }
