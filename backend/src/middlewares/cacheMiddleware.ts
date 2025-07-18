@@ -10,14 +10,25 @@ export const cacheMiddleware = (duration: number = 3600) => {
         const cachedResponse = cacheService.get(key);
 
         if (cachedResponse) {
+            // Send cached response
             return res.send(cachedResponse);
-        } else {
-            const originalSend = res.send.bind(res);
-            res.send = function(body): Response {
-                cacheService.set(key, body, duration);
-                return originalSend(body);
-            };
-            next();
         }
+
+        // Store original send method
+        const originalSend = res.send;
+        
+        // Override send method to cache responses
+        res.send = function(body) {
+            // Cache the response
+            cacheService.set(key, body, duration);
+            
+            // Restore original send method
+            res.send = originalSend;
+            
+            // Call original send
+            return originalSend.call(this, body);
+        };
+        
+        next();
     };
 };
