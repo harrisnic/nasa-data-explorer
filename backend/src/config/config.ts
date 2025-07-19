@@ -35,4 +35,8 @@ export const config = {
         apiKey: envVars.NASA_API_KEY as string,
         apiUrl: envVars.NASA_API_URL as string,
     },
+    bot: {
+        apiKey: envVars.BOT_API_KEY as string,
+        apiUrl: envVars.BOT_API_URL as string,
+    },
 };

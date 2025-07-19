@@ -9,6 +9,8 @@ import { ApiResponse } from './types';
 import {cacheService} from "./services/cacheService";
 import * as routes from './routes';
 import {loggingMiddleware} from "./middlewares/loggingMiddleware";
+import {swaggerSpec} from "./config/swagger";
+import swaggerUi from 'swagger-ui-express';
 
 const app: Application = express();
 
@@ -40,11 +42,20 @@ app.use(loggingMiddleware);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// Routes cache for 1 hour
+// Swagger UI setup
+app.use('/swagger/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// Optional: Serve swagger.json
+app.get('/swagger.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
+});
+
+// Routes cache for 1 hour
 app.use('/api/rovers', cacheMiddleware(config.server.cache.duration), routes.roverRoutes);
 app.use('/api/photos', cacheMiddleware(config.server.cache.duration), routes.photoRoutes);
 app.use('/api/manifests', cacheMiddleware(config.server.cache.duration), routes.manifestRoutes);
+app.use('/api/bot', cacheMiddleware(config.server.cache.duration), routes.botRoutes);
 
 // Health check endpoint, cached for 5 mins
 app.get('/', cacheMiddleware(300), (req: Request, res: Response) => {

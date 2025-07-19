@@ -36,6 +36,10 @@ export interface Manifest {
     total_photos: number;
 }
 
+export interface Prompt {
+    prompt: string;
+}
+
 export interface ApiResponse<T> {
     success: boolean;
     results?: T;
