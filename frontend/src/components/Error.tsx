@@ -7,7 +7,7 @@ interface Props {
     alertBoxMaxW?: string;
 }
 
-const Error = ({description, alertBoxMaxW}: Props) => {
+const Error = ({description, alertBoxMaxW="300px;"}: Props) => {
     return (
         <VStack>
             <Image mb="4" h="160px" src={ErrorUfo} alt="error" />

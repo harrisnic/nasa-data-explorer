@@ -2,7 +2,7 @@ import {Center, Text} from "@chakra-ui/react";
 
 const NasaBotDescription = () => {
     return (
-        <Center>
+        <Center mb="4">
             <Text
                 backgroundImage="linear-gradient(45deg, var(--chakra-colors-pink-400), var(--chakra-colors-pink-600))"
                 backgroundClip="text"

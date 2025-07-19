@@ -8,10 +8,9 @@ const apiClient = new APIClient<BotResponse>('/bot');
 const useNasaBot = (prompt: string, enabled: boolean = false) => {
 
     const { data, error, isLoading } = useQuery<FetchResponse<BotResponse>>({
-        queryKey: ['nasa-bot', prompt],
+        queryKey: ['nasaBot', prompt],
         queryFn: () => apiClient.post({prompt}),
         enabled: enabled && !!prompt, // Only run when enabled is true and prompt exists
-        staleTime: 5 * 60 * 1000, // 5 minutes
     });
 
     return {
