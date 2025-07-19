@@ -1,8 +1,8 @@
-import {HStack, Box, Link, IconButton} from '@chakra-ui/react';
-import {LuBotMessageSquare, LuBrainCircuit} from 'react-icons/lu';
+import {IconButton} from '@chakra-ui/react';
+import {LuBrainCircuit} from 'react-icons/lu';
 import {useNavigate} from "react-router-dom";
 
-const BotButton = () => {
+const NasaBotButton = () => {
     const navigate = useNavigate();
 
     const handleBotNavigate = () => {
@@ -16,4 +16,4 @@ const BotButton = () => {
     );
 };
 
-export default BotButton;
+export default NasaBotButton;

@@ -1,4 +1,4 @@
-import {Textarea, Field, IconButton} from "@chakra-ui/react";
+import {Textarea, Field, IconButton, HStack, Text} from "@chakra-ui/react";
 import {useForm} from "react-hook-form";
 import type {FieldValues} from "react-hook-form";
 import {z} from "zod";
@@ -9,7 +9,7 @@ const schema = z.object({
     prompt: z
         .string()
         .min(10, { message: 'Prompt to bot should be at least 10 characters.'})
-        .max(220, { message: 'Maximum prompt length to bot is 220 characters.'}),
+        .max(220, { message: 'Maximum allowed prompt length is 220 characters.'}),
 });
 
 type BotFormData = z.infer<typeof schema>;
@@ -17,7 +17,6 @@ type BotFormData = z.infer<typeof schema>;
 interface Props {
     onPromptSubmit: (prompt: string) => void;
 }
-
 
 const NasaBotForm = ({ onPromptSubmit }: Props) => {
     const {
@@ -36,12 +35,7 @@ const NasaBotForm = ({ onPromptSubmit }: Props) => {
     }
 
     return (
-        <>
-        <form onSubmit={handleSubmit(data => {
-            onSubmit(data);
-            reset();
-        })}>
-
+        <form onSubmit={handleSubmit(data => { onSubmit(data); reset(); })}>
             <Field.Root mb="6">
                 <Textarea
                     {...register("prompt")}
@@ -51,15 +45,15 @@ const NasaBotForm = ({ onPromptSubmit }: Props) => {
                     borderColor="pink.400"
                     outline="none"
                 />
-                {errors.prompt && <p>{errors.prompt.message}</p>}
             </Field.Root>
 
-            <IconButton bg="pink.600" disabled={!isValid} aria-label="Call support" rounded="full">
-                <LuBotMessageSquare />
-            </IconButton>
+            <HStack>
+                <IconButton me="3" type="submit" bg="pink.600" disabled={!isValid} rounded="full">
+                    <LuBotMessageSquare />
+                </IconButton>
+                {errors.prompt && <Text color="pink.400" textStyle="sm">{errors.prompt.message}</Text>}
+            </HStack>
         </form>
-
-    </>
 )
 }
 export default NasaBotForm

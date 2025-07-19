@@ -4,7 +4,7 @@ import {ColorModeButton} from "@/components/ui/color-mode.tsx";
 import NavBar from "@/components/NavBar.tsx";
 import {Link} from "react-router-dom";
 import RoverList from "@/components/RoverList.tsx";
-import BotButton from "@/components/BotButton.tsx";
+import NasaBotButton from "@/components/bot/NasaBotButton.tsx";
 
 const Header = () => {
     return (
@@ -22,7 +22,7 @@ const Header = () => {
             </HStack>
 
             <HStack>
-                <BotButton/>
+                <NasaBotButton/>
                 <ColorModeButton/>
             </HStack>
         </HStack>
