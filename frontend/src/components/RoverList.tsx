@@ -5,6 +5,7 @@ import type {IconType} from "react-icons";
 import type {Rover} from "@/types";
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
+import {useNavigate} from "react-router-dom";
 
 const roverIcons: Record<string, IconType> = {
     'Curiosity': LuBot,
@@ -16,12 +17,16 @@ const roverIcons: Record<string, IconType> = {
 
 const RoverList = () => {
     const { nasaCtxData: {selectedRover, rovers}, nasaCtxDispatcher } = useContext(NasaCtx)
+    const navigate = useNavigate();
 
     const [isOpen, setIsOpen] = useState(false);
 
     const handleRoverSelect = (rover: Rover) => {
         nasaCtxDispatcher({ type: NasaActionTypes.SIMPLE_APPEND, payload: { selectedRover: rover}});
         setIsOpen(false); // Close the drawer
+
+        // Navigate to the photo grid page
+        navigate('/');
     };
 
     const handleOpenChange = (details: { open: boolean }) => {

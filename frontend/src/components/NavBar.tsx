@@ -5,6 +5,7 @@ import {useContext} from "react";
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import type {Rover} from "@/types";
 import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
+import {useNavigate} from "react-router-dom";
 
 // Mapping object to assign specific icons to each rover by its name
 const roverIcons: Record<string, IconType> = {
@@ -17,9 +18,13 @@ const roverIcons: Record<string, IconType> = {
 
 const NavBar = () => {
     const { nasaCtxData: {selectedRover, rovers}, nasaCtxDispatcher } = useContext(NasaCtx)
+    const navigate = useNavigate();
 
     const handleRoverSelect = (rover: Rover) => {
         nasaCtxDispatcher({ type: NasaActionTypes.SIMPLE_APPEND, payload: { selectedRover: rover}});
+
+        // Navigate to the photo grid page
+        navigate('/');
     };
 
     return (
