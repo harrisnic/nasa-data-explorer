@@ -1,13 +1,11 @@
 import APIClient from "@/services/api-client.ts";
 import type {FetchResponse} from "@/services/api-client.ts";
-import type {Photo, Rover} from "@/types";
+import type {Photo} from "@/types";
 import {useQuery} from "@tanstack/react-query";
 
 const apiClient = new APIClient<Photo>('/photos');
 
-const usePhotoById = (photoId: number, selectedRover: string, selectedDate: string | null) => {
-
-
+const usePhotoById = (photoId: number, selectedRover: string | null, selectedDate: string | null) => {
 
     const { data, error, isLoading } = useQuery<FetchResponse<Photo>>({
         queryKey: ['photoById', photoId, selectedRover, selectedDate],
@@ -20,7 +18,6 @@ const usePhotoById = (photoId: number, selectedRover: string, selectedDate: stri
         enabled: !!selectedRover, // Only run query when rover is selected
         staleTime: 5 * 60 * 1000, // 5 minutes
     });
-
 
     return {
         data: data?.results.find(photo => photo.id === photoId) || {},

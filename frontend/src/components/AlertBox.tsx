@@ -18,4 +18,5 @@ const AlertBox = ({status, description, maxW="300px;"}: Props) => {
         </Alert.Root>
     )
 }
+
 export default AlertBox
