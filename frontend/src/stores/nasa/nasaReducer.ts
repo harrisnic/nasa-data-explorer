@@ -20,7 +20,7 @@ interface Camera {
 }
 
 export interface NasaState {
-    selectedRover?: Rover;
+    selectedRover?: Rover | null;
     selectedDate?: Date | null;
     rovers?: Rover[];
     photos?: Photo[];

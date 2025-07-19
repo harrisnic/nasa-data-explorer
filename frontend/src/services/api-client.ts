@@ -21,7 +21,26 @@ class APIClient<T> {
     getAll = (config: AxiosRequestConfig) => {
         return axiosInstance
             .get<FetchResponse<T>>(this.endpoint, config)
-            .then(res => res.data);
+            .then(res => res.data)
+            .catch(error => {
+                console.error(`Error fetching from ${this.endpoint}:`, error);
+                throw error;
+            });
+    }
+
+    // Record<string, any>: utility type that represents an object with keys and value types
+    post = (data: Record<string, string | number | boolean>) => {
+        return axiosInstance
+            .post<FetchResponse<T>>(this.endpoint, data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.data)
+            .catch(error => {
+                console.error(`Error posting to ${this.endpoint}:`, error);
+                throw error;
+            });
     }
 }
 
