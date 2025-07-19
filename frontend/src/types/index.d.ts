@@ -26,6 +26,10 @@ export interface Photo {
     rover: Rover;
 }
 
+export interface BotResponse {
+    answer: string;
+}
+
 export interface Manifest {
     name: string;
     landing_date: string;

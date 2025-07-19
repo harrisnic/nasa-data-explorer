@@ -14,7 +14,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Homepage/> },
             { path: 'photos/:id', element: <PhotoDetailPage/> },
-            { path: 'nasa-bot/', element: <NasaBotPage/> },
+            { path: 'bot/',  element: <NasaBotPage/> },
         ]
     }
 ] as RouteObject[])

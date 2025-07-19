@@ -4,6 +4,7 @@ import {ColorModeButton} from "@/components/ui/color-mode.tsx";
 import NavBar from "@/components/NavBar.tsx";
 import {Link} from "react-router-dom";
 import RoverList from "@/components/RoverList.tsx";
+import BotButton from "@/components/BotButton.tsx";
 
 const Header = () => {
     return (
@@ -19,7 +20,11 @@ const Header = () => {
                     <RoverList/>
                 </Box>
             </HStack>
-            <ColorModeButton/>
+
+            <HStack>
+                <BotButton/>
+                <ColorModeButton/>
+            </HStack>
         </HStack>
     )
 }
