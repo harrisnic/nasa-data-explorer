@@ -8,4 +8,6 @@ export const envSchema = Joi.object({
     CACHE_DURATION: Joi.number().default(3600), // 1 hour in seconds
     NASA_API_KEY: Joi.string().required(),
     NASA_API_URL: Joi.string().uri().required(),
+    BOT_API_KEY: Joi.string().required(),
+    BOT_API_URL: Joi.string().uri().required(),
 }).unknown();
