@@ -36,8 +36,8 @@ export interface Manifest {
     total_photos: number;
 }
 
-export interface Prompt {
-    prompt: string;
+export interface BotResponse {
+    answer: string;
 }
 
 export interface ApiResponse<T> {
