@@ -1,10 +1,10 @@
-import {Prompt} from "../types";
+import {BotResponse} from "../types";
 import {BotRepository} from "../repositories/botRepository";
 import type { ChatCompletionRequest } from "@mistralai/mistralai/models/components";
 
 export class BotService {
 
-    static async createPrompt(prompt: string): Promise<Prompt> {
+    static async createPrompt(userPrompt: string): Promise<BotResponse> {
 
         const systemPrompt = "You are a knowledgeable NASA assistant specializing in Mars " +
             "exploration and NASA's Mars missions. You should provide accurate, " +
@@ -25,7 +25,7 @@ export class BotService {
                 },
                 {
                     role: "user",
-                    content: prompt,
+                    content: userPrompt,
                 },
             ]
 
