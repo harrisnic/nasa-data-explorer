@@ -37,8 +37,13 @@ backend/.env.local
 backend/.env.*.local
 backend/.env.production
 backend/.env.*.production
+backend/.env.development
+backend/.env.*.development
+
 frontend/.env
 frontend/.env.local
 frontend/.env.*.local
 frontend/.env.production
 frontend/.env.*.production
+frontend/.env.development
+frontend/.env.*.development
