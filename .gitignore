@@ -35,7 +35,10 @@ frontend/.idea
 backend/.env
 backend/.env.local
 backend/.env.*.local
+backend/.env.production
+backend/.env.*.production
 frontend/.env
 frontend/.env.local
 frontend/.env.*.local
-
+frontend/.env.production
+frontend/.env.*.production
