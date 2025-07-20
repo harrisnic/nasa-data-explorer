@@ -27,8 +27,6 @@ This is the UI frontend part of the Mars Explorer application - an interactive w
 - [Zod](https://zod.dev/) - Schema validation
 - [Axios](https://axios-http.com/) - HTTP client
 
-## 📁 Project Structure
-
 ## 🔧 Environment Variables
 
 The following environment variables are required:
