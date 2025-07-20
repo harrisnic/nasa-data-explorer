@@ -3,7 +3,6 @@ import {LuCalendarDays, LuOrbit, LuAperture} from "react-icons/lu";
 import type {Photo} from "@/types";
 import PhotoImage from "@/components/PhotoImage.tsx";
 import {Link} from "react-router-dom";
-import type {Rover} from "@/stores/nasa/nasaReducer.ts";
 import {useContext} from "react";
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 

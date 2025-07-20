@@ -1,18 +1,5 @@
-import {useContext} from 'react'
-import {
-    Badge,
-    Flex,
-    HStack,
-    Icon,
-    Stack,
-    Text,
-    Dialog,
-    Button,
-    Portal,
-    CloseButton,
-    IconButton, Box, VStack
-} from "@chakra-ui/react";
-import {LuBattery, LuBatteryFull, LuBot, LuCpu, LuLandPlot, LuPickaxe, LuRocket} from "react-icons/lu";
+import { Dialog, Portal, CloseButton, IconButton } from "@chakra-ui/react";
+import {LuCpu} from "react-icons/lu";
 import RoverManifest from "@/components/RoverManifest.tsx";
 
 const RoverStatusDialog = () => {
