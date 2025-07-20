@@ -16,7 +16,7 @@ export class BotRepository {
     static async createPrompt(modelAISettings: ChatCompletionRequest): Promise<BotResponse> {
         try {
             const chatResponse = await this.client.chat.complete(modelAISettings);
-            return chatResponse.choices[0].message.content as BotResponse;
+            return { answer: chatResponse.choices[0].message.content || '' } as BotResponse;
         } catch (error: any) {
             throw new ExternalServiceError('Failed to create bot prompt');
         }

@@ -14,7 +14,7 @@ const useNasaBot = (prompt: string, enabled: boolean = false) => {
     });
 
     return {
-        data: data?.results,
+        data: data?.results as BotResponse | undefined,
         error: error?.message,
         loading: isLoading
     };

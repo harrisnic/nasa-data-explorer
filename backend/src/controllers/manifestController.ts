@@ -17,7 +17,8 @@ export class ManifestController {
                 throw new BadRequestError(`Invalid parameters: ${errors.array()[0].msg}`);
             }
 
-            const { rover }: { rover: string } = req.query;
+            const rover = req.query.rover as string;
+
             const manifest: Manifest = await ManifestService.findByRoverName(rover);
 
             const response: ApiResponse<Manifest> = {

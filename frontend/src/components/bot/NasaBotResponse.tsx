@@ -3,7 +3,7 @@ import type {BotResponse} from "@/types";
 import Error from "@/components/Error.tsx";
 
 interface Props {
-    data?: BotResponse[];
+    data?: BotResponse;
     loading: boolean;
     error?: string;
 }
@@ -11,11 +11,11 @@ interface Props {
 const NasaBotResponse = ({ data, loading, error }: Props) => {
     if (error) return  <Error description={error} />
     if (loading) return <SkeletonText noOfLines={4} />
-    if (!data || data.length === 0) return null;
+    if (!data) return null;
 
     return (
-        <Box p="3" borderRadius="md" h="220px" overflow="auto" bg="gray.100" _dark={{ bg: "gray.800" }}>
-            <Text>{data[0].answer}</Text>
+        <Box p="3" borderRadius="md" maxHeight="420px" overflow="auto" bg="gray.100" _dark={{ bg: "gray.800" }}>
+            <Text>{data.answer}</Text>
         </Box>
     );
 }

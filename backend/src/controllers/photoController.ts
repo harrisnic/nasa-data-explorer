@@ -17,7 +17,8 @@ export class PhotoController {
                 throw new BadRequestError(`Invalid parameters: ${errors.array()[0].msg}`);
             }
 
-            const { rover, date }: {rover: string, date: string | null} = req.query;
+            const { rover, date } = req.query as { rover: string; date?: string | null; };
+
             let photos: Photo[];
 
             if (date) {
