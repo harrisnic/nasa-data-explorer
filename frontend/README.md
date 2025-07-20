@@ -1,69 +1,47 @@
-# React + TypeScript + Vite
+# Mars Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the UI frontend part of the Mars Explorer application - an interactive web interface for browsing and exploring photos captured by NASA's Mars rovers. This frontend component provides users with an intuitive, responsive interface to discover stunning imagery from the Red Planet.
 
-Currently, two official plugins are available:
+## 🚀 Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js (v18 or higher)
+- npm
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Installation
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Clone the repository: git clone https://github.com/harrisnic/nasa-data-explorer.git
+3. Navigate to: cd frontend
+2. Install dependencies: npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [React](https://react.dev/) - Frontend library
+- [TypeScript](https://www.typescriptlang.org/) - Programming language
+- [Vite](https://vitejs.dev/) - Build tool
+- [@tanstack/react-query](https://tanstack.com/query/latest) - Data fetching and state management
+- [@chakra-ui/react](https://chakra-ui.com/) - UI component library
+- [React Router](https://reactrouter.com/) - Routing
+- [React Hook Form](https://react-hook-form.com/) - Form handling
+- [Zod](https://zod.dev/) - Schema validation
+- [Axios](https://axios-http.com/) - HTTP client
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📁 Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔧 Environment Variables
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The following environment variables are required:
+
+- `VITE_API_BASE_URL` - API base URL
+
+## 📝 Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build locally
+
+## 📜 License
+
+MIT Licence
