@@ -1,0 +1,49 @@
+/* Override Flatpickr Dark Theme */
+.flatpickr-calendar,
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-current-month .flatpickr-monthDropdown-months:hover,
+.flatpickr-months .flatpickr-month,
+.flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month,
+span.flatpickr-weekday {
+    background: #3f3f46;
+    border-color: #3f3f46;
+}
+
+.flatpickr-current-month {
+    font-size: 120%;
+    line-height: 0;
+    font-weight: normal;
+    padding: 8px 0 0 0;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    margin: 0 10px 0 0;
+    width: 106px;
+}
+
+.flatpickr-weekdays {
+    height: 42px;
+}
+
+span.flatpickr-weekday {
+    font-weight: normal;
+}
+
+.flatpickr-day:hover,
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover,
+
+.flatpickr-day.selected
+{
+    background: #a41752;
+    border-color: #a41752;
+}
+
+.flatpickr-day.today {
+    border-color: #a41752;
+}
+.flatpickr-day.today:hover, .flatpickr-day.today:focus {
+    background: #a41752;
+    border-color: #a41752;
+    color: #fff;
+}

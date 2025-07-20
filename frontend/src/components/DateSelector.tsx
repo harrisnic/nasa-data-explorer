@@ -1,4 +1,5 @@
 import "flatpickr/dist/themes/dark.css";
+import "../styles/flatpickr-custom.css";
 import Flatpickr from "react-flatpickr";
 import {Box, HStack} from "@chakra-ui/react";
 import styled from "@emotion/styled";
@@ -12,11 +13,10 @@ const StyledDatePickerWrapper = styled(Box)`
     .flatpickr-input {
         width: 180px;
         padding: 8px 12px;
-        border: 1px solid #f472b6;
+        border: 1px solid #db2777;
         border-radius: 6px;
         font-size: 14px;
         transition: border-color 0.2s, box-shadow 0.2s;
-        background-color: white;
 
         &:focus {
             border-color: #db2777;
@@ -29,7 +29,7 @@ const StyledDatePickerWrapper = styled(Box)`
         }
 
         &::placeholder {
-            color: #71717a;
+            color: #a1a1aa;
         }
     }
 `;
