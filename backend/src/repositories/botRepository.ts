@@ -8,7 +8,6 @@ export class BotRepository {
 
     private static client: Mistral;
 
-    // Initialize the static client
     static {
         const apiKey = configVar.bot.apiKey;
         this.client = new Mistral({apiKey: apiKey});
@@ -22,4 +21,5 @@ export class BotRepository {
             throw new ExternalServiceError('Failed to create bot prompt');
         }
     }
+
 }

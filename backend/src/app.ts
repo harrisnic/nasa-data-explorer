@@ -9,8 +9,9 @@ import { ApiResponse } from './types';
 import {cacheService} from "./services/cacheService";
 import * as routes from './routes';
 import {loggingMiddleware} from "./middlewares/loggingMiddleware";
-import {swaggerSpec} from "./config/swagger";
 import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from "swagger-jsdoc";
+import {swaggerConfig} from "./swagger/swaggerConfig";
 
 const app: Application = express();
 
@@ -42,14 +43,13 @@ app.use(loggingMiddleware);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// Swagger UI setup
-app.use('/swagger/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-// Optional: Serve swagger.json
-app.get('/swagger.json', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerSpec);
+const swaggerSpecs = swaggerJSDoc({
+    definition: swaggerConfig,
+    apis: [],
 });
+
+// Swagger UI setup
+app.use('/swagger/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 // Routes cache for 1 hour
 app.use('/api/rovers', cacheMiddleware(config.server.cache.duration), routes.roverRoutes);
