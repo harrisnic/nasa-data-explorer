@@ -11,9 +11,9 @@ This is the UI frontend part of the Mars Explorer application - an interactive w
 
 ### Installation
 
-1. Clone the repository: git clone https://github.com/harrisnic/nasa-data-explorer.git
-3. Navigate to: cd frontend
-2. Install dependencies: npm install
+1. Clone the repository: `git clone https://github.com/harrisnic/nasa-data-explorer.git`
+2. Navigate to: `cd frontend`
+3. Install dependencies: `npm install`
 
 ## 🛠️ Tech Stack
 
