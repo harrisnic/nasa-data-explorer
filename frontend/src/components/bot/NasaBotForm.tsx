@@ -12,8 +12,6 @@ const schema = z.object({
         .max(220, { message: 'Maximum allowed prompt length is 220 characters.'}),
 });
 
-type BotFormData = z.infer<typeof schema>;
-
 interface Props {
     onPromptSubmit: (prompt: string) => void;
 }

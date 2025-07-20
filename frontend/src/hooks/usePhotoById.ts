@@ -19,8 +19,10 @@ const usePhotoById = (photoId: number, selectedRover: string | null, selectedDat
         staleTime: 5 * 60 * 1000, // 5 minutes
     });
 
+    const photo = data?.results.find(photo => photo.id === photoId);
+
     return {
-        data: data?.results.find(photo => photo.id === photoId) || {},
+        data: photo,
         error: error?.message,
         loading: isLoading
     };

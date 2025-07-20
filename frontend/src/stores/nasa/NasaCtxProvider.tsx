@@ -1,8 +1,8 @@
-import {ReactNode, useReducer} from 'react'
-import type {NasaAction, NasaState, Rover} from "@/stores/nasa/nasaReducer.ts";
+import {useReducer} from 'react'
+import type {ReactNode} from 'react'
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import {nasaReducer} from "@/stores/nasa/nasaReducer.ts";
-import type {Photo} from "@/types";
+import type {Photo, Rover} from "@/types";
 
 interface Props {
     children?: ReactNode;

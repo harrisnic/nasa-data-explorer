@@ -5,7 +5,7 @@ import {useQuery} from "@tanstack/react-query";
 
 const apiClient = new APIClient<Manifest>('/manifests');
 
-const useManifests = (selectedRover: Rover) => {
+const useManifests = (selectedRover: Rover | null | undefined) => {
 
     const { data, error, isLoading } = useQuery<FetchResponse<Manifest>>({
         queryKey: ['manifests', selectedRover?.name],
@@ -18,8 +18,11 @@ const useManifests = (selectedRover: Rover) => {
         staleTime: 5 * 60 * 1000, // 5 minutes
     });
 
+    // Get the first manifest from the results array
+    const manifest = data?.results[0];
+
     return {
-        data: data?.results || [],
+        data: manifest,
         error: error?.message,
         loading: isLoading
     };

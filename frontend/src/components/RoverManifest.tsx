@@ -7,9 +7,10 @@ import Error from "@/components/Error.tsx";
 
 const RoverManifest = () => {
     const { nasaCtxData: {selectedRover}} = useContext(NasaCtx)
-    const {data, error, loading} = useManifests(selectedRover!)
+    const {data, error, loading} = useManifests(selectedRover)
 
     if (error) return <Error description={error} />
+    if (!data) return <Error description="Manifest not found" />;
 
     return(
         <VStack>

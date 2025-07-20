@@ -28,7 +28,7 @@ const NavBar = () => {
     };
 
     return (
-        <List.Root unstyled="true" variant="plain" >
+        <List.Root unstyled={true} variant="plain" >
             <HStack gap="6">
                 {rovers?.map(rover => {
                     const RoverIcon = roverIcons[rover.name] || roverIcons.default;

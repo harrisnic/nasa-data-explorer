@@ -1,7 +1,7 @@
 import {Alert} from "@chakra-ui/react";
 
 interface Props {
-    status: string;
+    status: "error" | "info" | "warning" | "success" | "neutral";
     description: string;
     maxW?: string;
 }

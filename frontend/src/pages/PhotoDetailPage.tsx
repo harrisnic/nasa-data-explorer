@@ -18,6 +18,7 @@ const PhotoDetailPage = () => {
 
     if (error) return  <Error description={error} alertBoxMaxW={"320px"}/>
     if (loading) return <Spinner size="xs" color="pink.600" m="5"/>
+    if (!data) return <Error description="Photo not found" alertBoxMaxW={"320px"}/>;
 
     return (
         <Box p="2" maxWidth="1200px" width="100%" mx="auto">
