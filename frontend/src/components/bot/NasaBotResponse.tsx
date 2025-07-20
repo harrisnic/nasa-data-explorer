@@ -2,13 +2,13 @@ import {Box, SkeletonText, Text} from "@chakra-ui/react";
 import type {BotResponse} from "@/types";
 import Error from "@/components/Error.tsx";
 
-interface NasaBotResponseProps {
+interface Props {
     data: BotResponse;
     loading: boolean;
     error?: string;
 }
 
-const NasaBotResponse = ({ data, loading, error }: NasaBotResponseProps) => {
+const NasaBotResponse = ({ data, loading, error }: Props) => {
     if (error) return  <Error description={error} />
     if (loading) return <SkeletonText noOfLines={4} />
     return (

@@ -1,14 +1,14 @@
 import { Image } from "@chakra-ui/react";
 import { useState } from "react";
 
-interface PhotoImageProps {
+interface Props {
     src: string;
     alt: string;
 }
 
 const fallbackImage: string = "/fallback-image.png";
 
-const PhotoImage = ({ src, alt }: PhotoImageProps) => {
+const PhotoImage = ({ src, alt }: Props) => {
 
     const [imgSrc, setImgSrc] = useState(src);
 
