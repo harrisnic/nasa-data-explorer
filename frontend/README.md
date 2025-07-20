@@ -29,7 +29,7 @@ This is the UI frontend part of the Mars Explorer application - an interactive w
 
 ## 🔧 Environment Variables
 
-The following environment variables are required:
+Create `.env.development` and `.env.production` files with the following variables:
 
 - `VITE_API_BASE_URL` - API base URL
 
