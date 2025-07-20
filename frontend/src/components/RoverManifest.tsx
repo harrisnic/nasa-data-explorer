@@ -1,17 +1,15 @@
 import {Box, Timeline, Text, HStack, Stack, Flex, Icon, Badge, Spinner, VStack} from "@chakra-ui/react";
-import AlertBox from "@/components/AlertBox.tsx";
 import {useContext} from "react";
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import useManifests from "@/hooks/useManifests.ts";
 import {LuBattery, LuBatteryFull, LuBot, LuLandPlot, LuPickaxe, LuRocket } from "react-icons/lu";
+import Error from "@/components/Error.tsx";
 
 const RoverManifest = () => {
     const { nasaCtxData: {selectedRover}} = useContext(NasaCtx)
     const {data, error, loading} = useManifests(selectedRover!)
 
-    if (error) {
-        return (<Box display="flex" justifyContent="center"><AlertBox status="error" description={error} /></Box>)
-    }
+    if (error) return <Error description={error} />
 
     return(
         <VStack>

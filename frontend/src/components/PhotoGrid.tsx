@@ -1,4 +1,4 @@
-import {Box, SimpleGrid, VStack} from "@chakra-ui/react";
+import {Box, SimpleGrid} from "@chakra-ui/react";
 import usePhotos from "@/hooks/usePhotos.ts";
 import PhotoCard from "./PhotoCard.tsx";
 import PhotoCardSkeleton from "@/components/PhotoCardSkeleton.tsx";
@@ -8,6 +8,7 @@ import {useContext, useEffect} from "react";
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
 import RoverManifest from "@/components/RoverManifest.tsx";
+import Error from "@/components/Error.tsx";
 
 const PhotoGrid = () => {
 
@@ -23,12 +24,12 @@ const PhotoGrid = () => {
         }
     }, [data?.length, nasaCtxDispatcher]);
 
-    if (error) return <AlertBox status="error" description={error} />
+    if (error) return <Error description={error} />
 
     if (data && data.length === 0 && !loading) {
         return(
             <>
-                <Box mb="6" display="flex" justifyContent="center">
+                <Box my="8" display="flex" justifyContent="center">
                     <AlertBox status="warning" maxW="340px" description="No photos found for the selected date."/>
                 </Box>
                 <RoverManifest />

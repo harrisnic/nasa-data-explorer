@@ -1,11 +1,11 @@
-import {Center, Grid, GridItem, Spinner} from "@chakra-ui/react";
+import {Grid, GridItem, Spinner} from "@chakra-ui/react";
 import PhotoGrid from "@/components/PhotoGrid.tsx";
 import {useContext, useEffect} from "react";
-import AlertBox from "@/components/AlertBox.tsx";
 import DateSelector from "@/components/DateSelector.tsx";
 import useRovers from "@/hooks/useRovers.ts";
 import {NasaCtx} from "@/stores/nasa/nasaCtx.ts";
 import {NasaActionTypes} from "@/stores/nasa/nasaReducer.ts";
+import Error from "@/components/Error.tsx";
 
 function Homepage() {
     const { data: rovers, error, loading } = useRovers();
@@ -19,13 +19,7 @@ function Homepage() {
     }, [rovers]);
 
     if (loading) return <Spinner color="pink.600" m="6"/>;
-    if (error) {
-        return (
-            <Center minH="100vh">
-                <AlertBox status="error" description={error}/>);
-            </Center>
-        );
-    }
+    if (error) return <Error description={error} />
 
     return (
         <Grid
