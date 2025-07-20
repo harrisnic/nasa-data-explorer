@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import {envSchema} from "./envSchema";
 
 // Load environment variables based on NODE_ENV
-const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env';
 dotenv.config({path: envFile});
 
 // Validate environment variables
@@ -37,6 +37,5 @@ export const config = {
     },
     bot: {
         apiKey: envVars.BOT_API_KEY as string,
-        apiUrl: envVars.BOT_API_URL as string,
     },
 };

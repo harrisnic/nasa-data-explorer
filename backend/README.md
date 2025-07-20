@@ -29,14 +29,17 @@ This is the API server component of the Mars Explorer application, providing a r
 
 ## 🔧 Environment Variables
 
-Create `.env.development` and `.env.production` files with the following variables:
+Create `.env` and `.env.production` files with the following variables:
 
 Required environment variables:
-- `PORT` - Server port number
-- `NODE_ENV` - Environment (development/production)
-- `NASA_API_KEY` - NASA API key for accessing rover data
-- `API_RATE_LIMIT` - Rate limiting configuration
-- `CORS_ORIGIN` - Allowed CORS origins
+- `NODE_ENV` - Environment (.env and .env.production)
+- `PORT` - Server port number, 3000
+- `API_RATE_LIMIT` - Rate limiting configuration, 100
+- `RATE_LIMIT_WINDOW_MS` - 900000
+- `CACHE_DURATION` - 3600, 1 hour
+- `NASA_API_KEY` - API Key from https://api.nasa.gov/
+- `NASA_API_URL` - https://api.nasa.gov/mars-photos/api/v1
+- `BOT_API_KEY` - API Key from https://mistral.ai/
 
 ## 📝 Scripts
 

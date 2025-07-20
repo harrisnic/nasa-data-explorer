@@ -9,5 +9,4 @@ export const envSchema = Joi.object({
     NASA_API_KEY: Joi.string().required(),
     NASA_API_URL: Joi.string().uri().required(),
     BOT_API_KEY: Joi.string().required(),
-    BOT_API_URL: Joi.string().uri().required(),
 }).unknown();

@@ -9,6 +9,9 @@ export interface FetchResponse<T> {
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL,
+    headers: {
+        'Content-Type': 'application/json'
+    }
 });
 
 class APIClient<T> {
@@ -28,14 +31,9 @@ class APIClient<T> {
             });
     }
 
-    // Record<string, any>: utility type that represents an object with keys and value types
     post = (data: Record<string, string | number | boolean>) => {
         return axiosInstance
-            .post<FetchResponse<T>>(this.endpoint, data, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+            .post<FetchResponse<T>>(this.endpoint, data)
             .then(res => res.data)
             .catch(error => {
                 console.error(`Error posting to ${this.endpoint}:`, error);
